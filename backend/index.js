@@ -34,7 +34,7 @@ app.use('/api', checkAuth, mediaRoute);
 const JWT_SECRET = process.env.JWT_SECRET || "dev-pass";
 
 app.get('/auth/google', googlePassport.authenticate('google', {scope: ['profile', 'email']}));
-app.get('/auth/google/callback', googlePassport.authenticate('google', {session: false, failureRedirect: `http://localhost:5173/login`}), (req,res)=> {
+app.get('/auth/google/callback', googlePassport.authenticate('google', {session: false, failureRedirect: `${process.env.FRONTEND_BASE_URL}/login`}), (req,res)=> {
     if (!req.user) {
       return res.status(401).json({ message: 'Authentication failed' });
     }
