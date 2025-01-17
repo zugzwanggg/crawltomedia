@@ -1,7 +1,7 @@
 import {useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { useAppSelector } from "../app/hooks";
 
 // icons
 import { FaCircleUser } from "react-icons/fa6";
@@ -10,14 +10,12 @@ import { LuLoaderCircle } from "react-icons/lu";
 
 // types
 import { IUser } from "../types";
-import { handleUserPic } from "../features/user/userSlice";
 import { useTranslation } from "react-i18next";
 
 
 const Profile = () => {
   const {t} = useTranslation();
 
-  const dispatch = useAppDispatch();
   const {user} = useAppSelector(state=>state.user);
   const userId = user?.id;
 
@@ -31,7 +29,7 @@ const Profile = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [isPicLoading, setIsPicLoading] = useState(false);;
-  const [error,setError] = useState('');
+  // const [error,setError] = useState('');
 
   const fetchUserData = async () => {
     setIsPicLoading(true)

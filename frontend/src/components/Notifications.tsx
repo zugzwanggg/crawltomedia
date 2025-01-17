@@ -4,8 +4,6 @@ import { useAppSelector } from '../app/hooks';
 import { useEffect, useState } from 'react';
 
 // icons
-import logoLightIcon from '../assets/logoLight.png';
-import LogoIcon from '../assets/logo.png';
 import { IoIosArrowBack } from "react-icons/io";
 import { PiEmpty } from "react-icons/pi";
 

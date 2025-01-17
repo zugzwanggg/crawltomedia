@@ -3,9 +3,7 @@ import { useState } from "react";
 // icons
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaRegEye } from "react-icons/fa";
-import { FiUserPlus } from "react-icons/fi";
 import { BiLike } from "react-icons/bi";
-import ytLogo from "../assets/youtube-logo.svg";
 
 type Props = {
   id: number|string,
@@ -13,7 +11,7 @@ type Props = {
   logo_path: string
 }
 
-const Post = ({id, title, logo_path}:Props) => {
+const Post = ({title, logo_path}:Props) => {
   const [isActive, setIsActive] = useState(false);
 
   const handlePostClick = () => {

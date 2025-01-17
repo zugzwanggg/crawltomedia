@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 // icons
-import { PiPlugsConnectedBold } from "react-icons/pi";
 import { TbPlugConnected } from "react-icons/tb";
 import { useAppSelector } from "../app/hooks";
 

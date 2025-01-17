@@ -5,12 +5,9 @@ import axios from "axios";
 import Post from "../components/Post";
 
 // icons
-import { FaCircleCheck } from "react-icons/fa6";
-import { MdCancel } from "react-icons/md";
 import { LuLoaderCircle } from "react-icons/lu";
 import { FiSearch } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
-import { CgCalendarDates } from "react-icons/cg";
 
 
 

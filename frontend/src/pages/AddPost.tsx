@@ -1,4 +1,4 @@
-import { ReactInstance, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios";
 
 // icons
@@ -218,7 +218,7 @@ const AddPost = () => {
                 ""
               }
             <div className="relative w-full">
-              <textarea onChange={handleTextChange} placeholder={t('add.post_text_placeholder')} className="shadow w-full bg-none h-40 border dark:border-grayColor rounded-lg resize-none p-4 bg-transparent outline-none">
+              <textarea value={text} onChange={handleTextChange} placeholder={t('add.post_text_placeholder')} className="shadow w-full bg-none h-40 border dark:border-grayColor rounded-lg resize-none p-4 bg-transparent outline-none">
               </textarea>
             <div>
           </div>

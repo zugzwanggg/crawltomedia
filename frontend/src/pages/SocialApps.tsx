@@ -2,9 +2,6 @@ import { useNavigate } from "react-router-dom"
 
 // icons
 import { IoIosArrowBack } from "react-icons/io";
-import instaLogo from "../assets/instagram-logo.svg";
-import tiktokLogo from "../assets/tiktok-logo.svg";
-import youtubeLogo from "../assets/youtube-logo.svg";
 import { PiPlugsConnectedBold } from "react-icons/pi";
 import { TbPlugConnected } from "react-icons/tb";
 import { FiSearch } from "react-icons/fi";
