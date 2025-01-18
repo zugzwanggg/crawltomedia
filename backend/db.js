@@ -6,7 +6,10 @@ dotenv.config();
 const connectionString = process.env.NODE_ENV === "production" ? process.env.POSTGRES_URL : process.env.DEV_POSTGRES_URL;
 
 export const db = new Pool({
-  connectionString
+  connectionString,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 db.on("error", (err)=> {
