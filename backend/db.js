@@ -8,8 +8,7 @@ const connectionString = process.env.NODE_ENV === "production" ? process.env.POS
 export const db = new Pool({
   connectionString,
   ssl: {
-    rejectUnauthorized: true,
-    ca: Buffer.from(process.env.SUPABASE_CA_CERT, 'base64').toString()
+    rejectUnauthorized: true
   },
 });
 
