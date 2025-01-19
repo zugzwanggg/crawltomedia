@@ -31,7 +31,7 @@ const Settings = () => {
   }
 
   return (
-    <div className="overflow-hidden relative h-full lg:h-mdhv bg-primaryColor dark:bg-darkPrimaryColor dark:text-white m-6 pb-20 lg:pb-0 lg:px-6 rounded-lg shadow-lg md:ml-8">
+    <div className="overflow-hidden relative h-full lg:h-mdhv bg-primaryColor dark:bg-darkPrimaryColor dark:text-white mt-10 mx-2 pb-20 lg:pb-0 lg:px-6 rounded-lg shadow-lg md:ml-8">
 
       <div className="rounded-lg flex h-full gap-9 xl:gap-24">
         <nav className="w-full md:w-fit border-none md:border-solid border-r-2 dark:border-grayColor">

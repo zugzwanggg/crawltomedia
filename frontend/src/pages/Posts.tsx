@@ -100,7 +100,7 @@ const Posts = () => {
 
 
   return (
-    <div className="mx-4 lg:mx-0 lg:p-4 dark:text-white">
+    <div className="mx-2 lg:mx-0 lg:p-4 dark:text-white">
       <h1 className="text-2xl lg:text-5xl font-bold my-8 pl-2">
         {t('posts.title')}
       </h1>

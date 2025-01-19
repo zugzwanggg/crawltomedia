@@ -10,7 +10,7 @@ const PrivacyPolicy = () => {
 
   return (
     <>
-      <header className=" dark:bg-black container">
+      <header className="container">
         <Link to='/' className="hidden lg:flex items-center py-6 gap-4">
           <img className="w-16 h-16 rounded-2xl dark:hidden" src={logoLightIcon} alt="logo" />
           <img className="w-16 h-16 rounded-2xl hidden dark:block" src={logoIcon} alt="logo" />

@@ -13,7 +13,7 @@ const Home = () => {
         {t('home.title')}
       </h1>
 
-      <div className="flex flex-wrap lg:flex-nowrap px-4 gap-4">
+      <div className="flex flex-wrap lg:flex-nowrap px-2 gap-4">
         <LineGraph/>
         <div className="flex flex-wrap w-full md:flex-row md:flex-nowrap lg:flex-col lg:w-1/3 gap-4">
           <SocMedias/>

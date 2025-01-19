@@ -120,7 +120,7 @@ const Profile = () => {
               isPicLoading || isLoading
               ?
               <div className="flex items-center justify-center min-w-16 w-16 h-16 rounded-full bg-black">
-                <LuLoaderCircle className="text-3xl animate-spin"/>
+                <LuLoaderCircle className="text-3xl animate-spin text-white"/>
               </div>
               :
               userData?.user_pic === null
