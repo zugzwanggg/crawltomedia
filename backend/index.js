@@ -44,7 +44,7 @@ app.get('/auth/google/callback', googlePassport.authenticate('google', {session:
       secure: process.env.NODE_ENV === "production",
       maxAge: 7 * 24 * 60 * 60 * 1000
     });
-    res.redirect(`http://localhost:5173`)
+    res.redirect(`${process.env.FRONTEND_BASE_URL}}`)
 })
 
 const PORT = process.env.PORT || 8080;
