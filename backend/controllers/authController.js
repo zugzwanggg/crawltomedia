@@ -48,11 +48,11 @@ export const login = async (req,res) => {
     }
 
     const token = jwt.sign(payload, JWT_SECRET);
-    const sevenDays = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+    const sevenDays = 7 * 24 * 60 * 60 * 1000;
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      expiresIn: sevenDays
+      maxAge: sevenDays
     });
 
     res.status(200).json({
@@ -246,11 +246,11 @@ export const verifyOtp = async (req,res) => {
     const payload = user.rows[0];
 
     const token = jwt.sign(payload, JWT_SECRET);
-    const sevenDays = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+    const sevenDays = 7 * 24 * 60 * 60 * 1000;
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      expiresIn: sevenDays
+      maxAge: sevenDays
     })
 
     res.status(200).json({
