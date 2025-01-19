@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 
 // icons
 import logoIcon from "../assets/logo.png";
@@ -7,6 +8,10 @@ import logoLightIcon from "../assets/logoLight.png";
 
 const PrivacyPolicy = () => {
   const {t} = useTranslation();
+
+  useEffect(() => {
+    window.location.href = '/tiktokWj7z2Zy8i8ATnzII3320Oa2sk7alc34c.txt';
+  }, []);
 
   return (
     <>
