@@ -52,7 +52,8 @@ export const login = async (req,res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      maxAge: sevenDays
+      maxAge: sevenDays,
+      sameSite: 'none'
     });
 
     res.status(200).json({
@@ -152,7 +153,8 @@ export const isAuthenticated = async (req,res) => {
 export const logout = async (req,res) => {
     res.cookie("token", "", {
       httpOnly: true,
-      expiresIn: new Date(0)
+      expiresIn: new Date(0),
+      sameSite: 'none'
     }).send()
 }
 
@@ -250,7 +252,8 @@ export const verifyOtp = async (req,res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      maxAge: sevenDays
+      maxAge: sevenDays,
+      sameSite: 'none'
     })
 
     res.status(200).json({
