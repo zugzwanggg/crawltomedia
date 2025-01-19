@@ -30,7 +30,7 @@ export const updateUserPicture = async (req,res) => {
     const {user_id} = req.body;
     let fileName = randomUserImgName();
     const storage = new Storage({
-      keyFilename: process.env.GOOGLE_CLOUD_SERVICE_ACCOUNT_KEY,
+      keyFilename: Buffer.from(process.env.GOOGLE_CLOUD_SERVICE_ACCOUNT_KEY, 'base64').toString('utf-8'),
       projectId: process.env.GOOGLE_CLOUD_ID
     })
 
