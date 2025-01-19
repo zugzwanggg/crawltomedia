@@ -153,6 +153,7 @@ export const isAuthenticated = async (req,res) => {
 export const logout = async (req,res) => {
     res.cookie("token", "", {
       httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
       expiresIn: new Date(0),
       sameSite: 'none'
     }).send()
