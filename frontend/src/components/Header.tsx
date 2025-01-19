@@ -50,8 +50,8 @@ const Header = () => {
   return (
     <header className="relative shadow-lg bg-primaryColor dark:bg-darkPrimaryColor py-3 lg:py-5 px-8 flex justify-between lg:justify-end">
       <Link className="lg:hidden" to='/'>
-        <img className="w-16 h-16 rounded-2xl dark:hidden" src={logoLightIcon} alt="logo" />
-        <img className="w-16 h-16 rounded-2xl hidden dark:block" src={logoIcon} alt="logo" />
+        <img className="w-10 md:w-16 md:h-16 rounded-2xl dark:hidden" src={logoLightIcon} alt="logo" />
+        <img className="w-10 md:w-16 md:h-16 rounded-2xl hidden dark:block" src={logoIcon} alt="logo" />
       </Link>
       <div className="flex items-center gap-10">
 
