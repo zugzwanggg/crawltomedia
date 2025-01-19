@@ -9,9 +9,9 @@ import logoLightIcon from "../assets/logoLight.png";
 const PrivacyPolicy = () => {
   const {t} = useTranslation();
 
-  useEffect(() => {
-    window.location.href = '/tiktokWj7z2Zy8i8ATnzII3320Oa2sk7alc34c.txt';
-  }, []);
+  // useEffect(() => {
+  //   window.location.href = '/tiktokWj7z2Zy8i8ATnzII3320Oa2sk7alc34c.txt';
+  // }, []);
 
   return (
     <>
