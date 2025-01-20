@@ -34,6 +34,7 @@ CREATE TABLE user_apps (
   app_id INT,
   access_token TEXT,
   refresh_token TEXT,
+  media_user_id BIGINT NOT NULL UNIQUE,
   FOREIGN KEY (user_id) REFERENCES users(id)
   FOREIGN KEY (app_id) REFERENCES apps(id)
 );
