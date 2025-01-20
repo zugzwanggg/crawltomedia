@@ -1,12 +1,14 @@
 import {Router} from "express";
 import { connectToInstagram, getStatistics } from "../controllers/mediaController.js";
 import {passport as googlePassport} from "../services/passport.js"
+import { checkAuth } from "../middlewares/checkAuth.js";
+
 import jwt from "jsonwebtoken";
 
 export const mediaRoute = Router();
 
-mediaRoute.get('api/getStatistics/:user_id', getStatistics);
-mediaRoute.get('auth/instagram/callback', connectToInstagram);
+mediaRoute.get('api/getStatistics/:user_id', checkAuth, getStatistics);
+mediaRoute.get('auth/instagram/callback', checkAuth, connectToInstagram);
 
 mediaRoute.get('auth/google', googlePassport.authenticate('google', {scope: ['profile', 'email']}));
 mediaRoute.get('auth/google/callback', googlePassport.authenticate('google', {session: false, failureRedirect: `${process.env.FRONTEND_BASE_URL}/login`}), (req,res)=> {
