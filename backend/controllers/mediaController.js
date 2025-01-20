@@ -1,6 +1,7 @@
 import { db } from "../db.js";
 import axios from "axios";
 import { statistics } from "../helpers/platforms.js";
+import qs from 'qs';
 
 export const getStatistics = async (req,res) => {
   try {
@@ -24,15 +25,21 @@ export const connectToInstagram = async (req,res) => {
   }
 
   try {
-    const tokenRes = await axios.post('https://api.instagram.com/oauth/access_token', null, {
-      params: {
+    const tokenRes = await axios.post(
+      'https://api.instagram.com/oauth/access_token', 
+      qs.stringify({
         client_id: process.env.INSTAGRAM_APP_ID,
         client_secret: process.env.INSTAGRAM_API_KEY,
         grant_type: 'authorization_code',
-        redirect_uri: `${process.env.BASE_URL}auth/instagram/callback`,
+        redirect_uri: `${process.env.BASE_URL}/auth/instagram/callback`, // Ensure no double slashes
         code: authCode
+      }),
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded' // Proper content type for form data
+        }
       }
-    })
+    )
 
     const accessToken = tokenRes.data.access_token;
     const userInstaId = tokenRes.data.user_id;
