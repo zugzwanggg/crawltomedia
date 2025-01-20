@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 // icons
 import { IoIosArrowBack } from "react-icons/io";
@@ -10,11 +10,7 @@ import { useAppSelector } from "../app/hooks";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-type fetchedApps = {
-  id: number | string,
-  name: string,
-  logo_path: string
-}
+import { TypeApp } from "../types";
 
 const SocialApps = () => {
   const {t} = useTranslation();
@@ -22,8 +18,8 @@ const SocialApps = () => {
   const {user} = useAppSelector(state => state.user);
   const userId = user?.id;
 
-  const [userData, setUserData] = useState<fetchedApps[]>([]);
-  const [apps, setApps] = useState<fetchedApps[]>([]);
+  const [userData, setUserData] = useState<TypeApp[]>([]);
+  const [apps, setApps] = useState<TypeApp[]>([]);
   const [search,setSearch] = useState('');
 
   const nav = useNavigate();
@@ -103,19 +99,11 @@ const SocialApps = () => {
     
                 <p className="text-sm font-semibold">{userApp?.name}</p>
               </div>
-              {
-                false
-                ?
-                <button className="flex items-center text-sm py-1 gap-2 shadow-lg bg-white text-darkPrimaryColor p-2 rounded duration-500 hover:opacity-85">
-                  {t('connect_btn')}
-                  <PiPlugsConnectedBold className="text-lg lg:text-2xl"/>
-                </button>
-                :
-                <button className="flex text-sm items-center gap-2 bg-grayColor text-white py-1 px-2 rounded duration-500 hover:opacity-85">
-                  {t('disconnect_btn')}
-                  <TbPlugConnected className="text-lg lg:text-2xl"/>
-                </button>
-              }
+
+              <button className="flex text-sm items-center gap-2 bg-grayColor text-white py-1 px-2 rounded duration-500 hover:opacity-85">
+                {t('disconnect_btn')}
+                <TbPlugConnected className="text-lg lg:text-2xl"/>
+              </button>
             </li>
             })
           }
@@ -153,19 +141,11 @@ const SocialApps = () => {
           
                         <p className="text-sm font-semibold">{app?.name}</p>
                       </div>
-                      {
-                        true
-                        ?
-                        <button className="flex items-center text-sm py-1 gap-2 shadow-lg bg-white text-darkPrimaryColor p-2 rounded duration-500 hover:opacity-85">
-                          {t('connect_btn')}
-                          <PiPlugsConnectedBold className="text-lg lg:text-2xl"/>
-                        </button>
-                        :
-                        <button className="flex text-sm items-center gap-2 bg-grayColor text-white py-1 px-2 rounded duration-500 hover:opacity-85">
-                          {t('disconnect_btn')}
-                          <TbPlugConnected className="text-lg lg:text-2xl"/>
-                        </button>
-                      }
+                      <Link to={`${app.oauth_link}&user_id=${userId}`} className="flex items-center text-sm py-1 gap-2 shadow-lg bg-white text-darkPrimaryColor p-2 rounded duration-500 hover:opacity-85">
+                        {t('connect_btn')}
+                        <PiPlugsConnectedBold className="text-lg lg:text-2xl"/>
+                      </Link>
+                        
                     </li>
             })
           :

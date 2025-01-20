@@ -21,7 +21,8 @@ export interface IPost {
 export type TypeApp = {
   id: number | string,
   name: string,
-  logo_path: string
+  logo_path: string,
+  oauth_link: string
 }
 
 export interface INotification {
