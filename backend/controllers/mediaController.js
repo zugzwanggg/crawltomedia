@@ -29,7 +29,7 @@ export const connectToInstagram = async (req,res) => {
         client_id: process.env.INSTAGRAM_APP_ID,
         client_secret: process.env.INSTAGRAM_API_KEY,
         grant_type: 'authorization_code',
-        redirect_uri: `${process.env.BASE_URL}/auth/instagram/callback`,
+        redirect_uri: `${process.env.BASE_URL}auth/instagram/callback`,
         code: authCode
       }
     })
