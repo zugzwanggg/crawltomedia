@@ -22,5 +22,5 @@ mediaRoute.get('/auth/google/callback', googlePassport.authenticate('google', {s
       maxAge: 7 * 24 * 60 * 60 * 1000,
       sameSite: 'none'
     });
-    res.redirect(`${process.env.FRONTEND_BASE_URL}}`)
+    res.redirect(`${process.env.FRONTEND_BASE_URL}`)
 })
