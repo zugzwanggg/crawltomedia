@@ -141,7 +141,7 @@ const SocialApps = () => {
           
                         <p className="text-sm font-semibold">{app?.name}</p>
                       </div>
-                      <Link to={`${app.oauth_link}&user_id=${userId}`} className="flex items-center text-sm py-1 gap-2 shadow-lg bg-white text-darkPrimaryColor p-2 rounded duration-500 hover:opacity-85">
+                      <Link to={`${app.oauth_link}${app.oauth_link.includes('?') ? '&' : '?'}user_id=${userId}`} className="flex items-center text-sm py-1 gap-2 shadow-lg bg-white text-darkPrimaryColor p-2 rounded duration-500 hover:opacity-85">
                         {t('connect_btn')}
                         <PiPlugsConnectedBold className="text-lg lg:text-2xl"/>
                       </Link>

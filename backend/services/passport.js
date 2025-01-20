@@ -10,7 +10,6 @@ passport.use(new GoogleStrategy({
   callbackURL: `${process.env.BASE_URL}auth/google/callback`
 },
 async (accessToken, refreshToken, profile, done) => {
-
   try {
     const checkUser = await db.query("SELECT id, google_id, username, email, user_pic, verified FROM users WHERE google_id = $1", [profile.id]);
     

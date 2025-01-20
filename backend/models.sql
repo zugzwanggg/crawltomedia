@@ -6,7 +6,8 @@ CREATE TABLE users (
   password VARCHAR(255) NUT NULL,
   user_pic VARCHAR(255),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  verified BOOLEAN DEFAULT False
+  verified BOOLEAN DEFAULT False,
+  google_id VARCHAR(255)
 );
 
 -- apps
