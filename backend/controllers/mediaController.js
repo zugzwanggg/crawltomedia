@@ -24,7 +24,7 @@ export const connectToInstagram = async (req,res) => {
   }
 
   try {
-    const tokenRes = await axios.post('https://api.instagram.com/oauth/access/token', null, {
+    const tokenRes = await axios.post('https://api.instagram.com/oauth/access_token', null, {
       params: {
         client_id: process.env.INSTAGRAM_APP_ID,
         client_secret: process.env.INSTAGRAM_API_KEY,
