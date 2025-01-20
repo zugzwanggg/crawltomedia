@@ -1,6 +1,7 @@
 import {Router} from "express";
-import { getStatistics } from "../controllers/mediaController.js";
+import { connectToInstagram, getStatistics } from "../controllers/mediaController.js";
 
 export const mediaRoute = Router();
 
-mediaRoute.get('/getStatistics/:user_id', getStatistics)
+mediaRoute.get('api/getStatistics/:user_id', getStatistics);
+mediaRoute.get('auth/instagram/callback', connectToInstagram);

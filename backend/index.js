@@ -28,7 +28,7 @@ app.use(cors(corsOptions));
 app.use(passport.initialize());
 app.use('/api', authRoute);
 app.use('/api', checkAuth,userRoute);
-app.use('/api', checkAuth, mediaRoute);
+app.use('', checkAuth, mediaRoute);
 
 // oauth2
 const JWT_SECRET = process.env.JWT_SECRET || "dev-pass";
