@@ -62,7 +62,7 @@ const SocialApps = () => {
     try {
       
       await axios.delete(`${import.meta.env.VITE_BACKEND_BASE_URL}/disconnectApp/${userId}`);
-
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
