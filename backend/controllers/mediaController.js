@@ -31,12 +31,12 @@ export const connectToInstagram = async (req,res) => {
         client_id: process.env.INSTAGRAM_APP_ID,
         client_secret: process.env.INSTAGRAM_API_KEY,
         grant_type: 'authorization_code',
-        redirect_uri: `${process.env.BASE_URL}/auth/instagram/callback`, // Ensure no double slashes
+        redirect_uri: `${process.env.BASE_URL}/auth/instagram/callback`,
         code: authCode
       }),
       {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded' // Proper content type for form data
+          'Content-Type': 'application/x-www-form-urlencoded'
         }
       }
     )
