@@ -15,6 +15,21 @@ export const getStatistics = async (req,res) => {
   }
 }
 
+export const disconnectUserApp = async (req,res) => {
+  try {
+
+    const {user_id} = req.params;
+    await db.query("DELETE FROM user_apps WHER user_id = $1", [user_id]);
+
+    res.status(204).json({
+      message: "Succesfully disconnected"
+    })
+    
+  } catch (error) {
+    console.log('Error at disconnectUserApp');
+    res.status(500).send(error)
+  }
+}
 
 export const connectToInstagram = async (req,res) => {
   const authCode = req.query.code;
