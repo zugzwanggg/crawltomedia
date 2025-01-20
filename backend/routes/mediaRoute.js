@@ -8,8 +8,8 @@ export const mediaRoute = Router();
 mediaRoute.get('api/getStatistics/:user_id', getStatistics);
 mediaRoute.get('auth/instagram/callback', connectToInstagram);
 
-mediaRoute.get('/auth/google', googlePassport.authenticate('google', {scope: ['profile', 'email']}));
-mediaRoute.get('/auth/google/callback', googlePassport.authenticate('google', {session: false, failureRedirect: `${process.env.FRONTEND_BASE_URL}/login`}), (req,res)=> {
+mediaRoute.get('auth/google', googlePassport.authenticate('google', {scope: ['profile', 'email']}));
+mediaRoute.get('auth/google/callback', googlePassport.authenticate('google', {session: false, failureRedirect: `${process.env.FRONTEND_BASE_URL}/login`}), (req,res)=> {
     if (!req.user) {
       return res.status(401).json({ message: 'Authentication failed' });
     }
