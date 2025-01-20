@@ -30,6 +30,16 @@ const SocMedias = () => {
     }
   }
 
+  const handleDisconnect = async () => {
+    try {
+      
+      await axios.delete(`${import.meta.env.VITE_BACKEND_BASE_URL}/disconnectApp/${userId}`);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(()=> {
     fetchUserApps();
   },[])
@@ -49,7 +59,7 @@ const SocMedias = () => {
 
             <p className="text-sm font-semibold">{userApp?.name}</p>
           </div>
-          <button className="flex text-sm items-center gap-2 bg-grayColor text-white py-1 px-2 rounded duration-500 hover:opacity-85">
+          <button onClick={handleDisconnect} className="flex text-sm items-center gap-2 bg-grayColor text-white py-1 px-2 rounded duration-500 hover:opacity-85">
             {t('disconnect_btn')}
             <TbPlugConnected className="text-lg lg:text-2xl"/>
           </button>
