@@ -12,7 +12,9 @@ CREATE TABLE users (
 -- apps
 CREATE TABLE apps (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(20) UNIQUE NOT NULL
+  name VARCHAR(20) UNIQUE NOT NULL,
+  logo_path VARCHAR(255),
+  oauth_link TEXT NOT NULL
 );
 
 -- posts
