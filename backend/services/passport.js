@@ -10,18 +10,20 @@ passport.use(new GoogleStrategy({
   callbackURL: `${process.env.BASE_URL}auth/google/callback`
 },
 async (accessToken, refreshToken, profile, done) => {
+  const insertIntoApps = "INSERT INTO user_apps (user_id, app_id, access_token, refresh_token, media_user_id) VALUES($1, 2, $2, $3, $4)"
+
   try {
     const checkUser = await db.query("SELECT id, google_id, username, email, user_pic, verified FROM users WHERE google_id = $1 OR email = $2", [profile.id, profile.emails[0].value]);
     if (checkUser.rows.length > 0) {
       const checkUserApps = await db.query("SELECT * FROM user_apps WHERE user_id = $1", [checkUser.rows[0].id])
       if (checkUserApps.rows.length === 0) {
-        await db.query("INSERT INTO user_apps (user_id, app_id, access_token, refresh_token) VALUES($1, 2, $2, $3)", [checkUser.rows[0].id, accessToken, refreshToken]);
+        await db.query(insertIntoApps, [checkUser.rows[0].id, accessToken, refreshToken, profile.id]);
       }
       return done(null, checkUser.rows[0])
     }
 
     const user = await db.query("INSERT INTO users (google_id, username, email, user_pic, verified) VALUES($1,$2,$3,$4, true) RETURNING id, google_id, username, email, user_pic, verified", [profile.id, 'user ' + profile.displayName , profile.emails[0].value, profile.photos[0].value]);
-    await db.query("INSERT INTO user_apps (user_id, app_id, access_token, refresh_token) VALUES($1, 2, $2, $3)", [user.rows[0].id, accessToken, refreshToken]);
+    await db.query(insertIntoApps, [user.rows[0].id, accessToken, refreshToken, profile.id]);
 
     return done(null, user.rows[0]);
   } catch (error) {
