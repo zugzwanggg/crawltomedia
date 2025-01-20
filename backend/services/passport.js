@@ -17,13 +17,13 @@ async (accessToken, refreshToken, profile, done) => {
     if (checkUser.rows.length > 0) {
       const checkUserApps = await db.query("SELECT * FROM user_apps WHERE user_id = $1", [checkUser.rows[0].id])
       if (checkUserApps.rows.length === 0) {
-        await db.query(insertIntoApps, [checkUser.rows[0].id, accessToken, refreshToken, profile.id]);
+        await db.query(insertIntoApps, [checkUser.rows[0].id, accessToken, refreshToken, parseInt(profile.id)]);
       }
       return done(null, checkUser.rows[0])
     }
 
     const user = await db.query("INSERT INTO users (google_id, username, email, user_pic, verified) VALUES($1,$2,$3,$4, true) RETURNING id, google_id, username, email, user_pic, verified", [profile.id, 'user ' + profile.displayName , profile.emails[0].value, profile.photos[0].value]);
-    await db.query(insertIntoApps, [user.rows[0].id, accessToken, refreshToken, profile.id]);
+    await db.query(insertIntoApps, [user.rows[0].id, accessToken, refreshToken, parseInt(profile.id)]);
 
     return done(null, user.rows[0]);
   } catch (error) {
