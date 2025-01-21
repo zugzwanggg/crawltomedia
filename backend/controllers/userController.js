@@ -109,7 +109,7 @@ export const getAvailableApps = async (req,res) => {
   try {
     const { user_id } = req.params;
 
-    const apps = await db.query("SELECT * FROM apps JOIN user_apps ON user_apps.app_id != apps.id WHERE user_apps.user_id = $1", [user_id]);
+    const apps = await db.query("SELECT * FROM apps JOIN user_apps ON user_apps.app_id = apps.id WHERE user_apps.user_id != $1", [user_id]);
 
     res.status(200).json(apps.rows);
     
