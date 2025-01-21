@@ -33,6 +33,7 @@ axios.defaults.withCredentials = true;
 // multilang
 import './utils/i18n';
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsAndConditions from "./pages/TermsAndConditions";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -67,8 +68,9 @@ function App() {
       <Route path="/register" element={isAuth ? <Navigate to='/'/> : <Register/>}/>
       <Route path="/register/confirm" element={ isAuth ? <Navigate to='/'/> :<ConfirmEmail/>}/>
       <Route path="/login/reset" element={isAuth ? <Navigate to='/'/> : <ResetPassword/>}/>
-
+    
       <Route path="/privacy" element={<PrivacyPolicy/>} />
+      <Route path="/terms" element={<TermsAndConditions/>} />
       <Route path="*" element={<PageNotFound/>}/>
     </Routes>
   )

@@ -193,5 +193,79 @@
         "content": "We may update this Privacy Policy from time to time. Changes will be effective immediately upon posting. We encourage you to review this page periodically for updates."
       }
     }
+  },
+  "termsAndConditions": {
+    "title": "Terms and Conditions",
+    "lastUpdated": "Last Updated: {{date}}",
+    "acceptance": {
+      "title": "Acceptance of Terms",
+      "content": "By accessing or using Crawltomedia, you agree to be bound by these Terms. If you do not agree, please refrain from using our services."
+    },
+    "description": {
+      "title": "Description of Services",
+      "content": "Crawltomedia provides tools to authenticate, post content, and analyze social media accounts, including but not limited to platforms like Instagram, YouTube, and TikTok. Users can connect their accounts through third-party integrations and access analytics."
+    },
+    "userResponsibilities": {
+      "title": "User Responsibilities",
+      "content": {
+        "1": "You must be at least {{age}}+ years old to use our services.",
+        "2": "You agree to provide accurate and complete information during registration and use of the platform.",
+        "3": "You are responsible for maintaining the security of your credentials and access tokens.",
+        "4": "You must comply with the terms and policies of the third-party social media platforms you integrate with."
+      }
+    },
+    "accountSecurity": {
+      "title": "Account Security",
+      "content": {
+        "1": "Users are responsible for safeguarding their login credentials.",
+        "2": "Crawltomedia is not liable for unauthorized access resulting from user negligence."
+      }
+    },
+    "thirdParty": {
+      "title": "Third-Party Integrations",
+      "content": {
+        "1": "Our app relies on third-party APIs to access social media features.",
+        "2": "We do not guarantee continuous availability of third-party services.",
+        "3": "Users must comply with the terms of each social media platform integrated into Crawltomedia."
+      }
+    },
+    "dataPrivacy": {
+      "title": "Data Collection and Privacy",
+      "content": "We collect and store data related to social media accounts to provide analytics and management features. Our Privacy Policy outlines how we handle and protect your data."
+    },
+    "prohibitedActivities": {
+      "title": "Prohibited Activities",
+      "content": {
+        "1": "Users must not use our services for any unlawful or fraudulent activity.",
+        "2": "Attempt to reverse engineer or disrupt the platform.",
+        "3": "Violate social media platform policies while using Crawltomedia."
+      }
+    },
+    "termination": {
+      "title": "Termination",
+      "content": "Crawltomedia reserves the right to suspend or terminate user accounts at our discretion if these Terms are violated."
+    },
+    "liability": {
+      "title": "Limitation of Liability",
+      "content": {
+        "1": "Crawltomedia is provided 'as is,' without warranties of any kind.",
+        "2": "We are not responsible for any loss of data, revenue, or unauthorized access.",
+        "3": "Users acknowledge that they use the platform at their own risk."
+      }
+    },
+    "modifications": {
+      "title": "Modifications to Terms",
+      "content": "We reserve the right to update or modify these Terms at any time. Users will be notified of significant changes."
+    },
+    "governingLaw": {
+      "title": "Governing Law",
+      "content": "These Terms are governed by applicable local and international laws."
+    },
+    "cookiesPolicy": {
+      "title": "Cookies Policy",
+      "content": "We use cookies to improve user experience, analyze site traffic, and serve personalized content. By using our services, you consent to the use of cookies as described in our policy. You can manage cookie preferences in your browser settings."
+    }
+
   }
+
 }
