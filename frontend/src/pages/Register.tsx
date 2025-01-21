@@ -71,7 +71,7 @@ const Register = () => {
           <input checked={privacy} onChange={()=>setPrivacy(prev=>!prev)} type="checkbox" />
           <small> 
             <Trans i18nKey={'register.privacy'}>
-              <Link className="text-sky-500 underline" to='/privacy'></Link>
+              <Link className="text-sky-500 underline" to='/terms'></Link>
             </Trans>
           </small>
         </div>
