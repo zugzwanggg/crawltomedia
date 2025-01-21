@@ -33,7 +33,7 @@ export const disconnectUserApp = async (req,res) => {
 
 export const connectToInstagram = async (req,res) => {
   const authCode = req.query.code;
-  const userId = req.query.user_id;
+  const userId = req.query.state;
 
   if (!authCode) {
     return res.status(400).send('Authorization cannot be provided')
