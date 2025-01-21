@@ -39,7 +39,7 @@ const SocialApps = () => {
   const fetchAvailableApps =async () => {
     try {
 
-      const res = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/apps`);
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/availableApps/${userId}`);
 
       setApps(res.data);
       
