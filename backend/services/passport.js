@@ -26,11 +26,11 @@ async (accessToken, refreshToken, profile, done) => {
   const insertIntoApps = "INSERT INTO user_apps (user_id, app_id, access_token, refresh_token, media_user_id) VALUES($1, 2, $2, $3, $4)"
 
   try {
-    const userId = checkUserId();
-    if (userId.rows.length > 0) {
-      await db.query(insertIntoApps, [userId.rows[0].id, accessToken, refreshToken, profile.id]);
-      return done(null, userId.rows[0])
-    }
+    // const userId = checkUserId();
+    // if (userId.rows.length > 0) {
+    //   await db.query(insertIntoApps, [userId.rows[0].id, accessToken, refreshToken, profile.id]);
+    //   return done(null, userId.rows[0])
+    // }
 
     const checkUser = await db.query("SELECT id, google_id, username, email, user_pic, verified FROM users WHERE google_id = $1", [profile.id]);
     if (checkUser.rows.length > 0) {
