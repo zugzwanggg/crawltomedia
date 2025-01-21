@@ -11,7 +11,7 @@ userRoute.get('/getUser/:user_id', getUserById);
 // apps
 userRoute.get('/searchApp', searchApp);
 userRoute.get('/apps/:user_id', getUserApps);
-userRoute.get('/apps', getAvailableApps);
+userRoute.get('/availableApps/:user_id', getAvailableApps);
 
 
 // posts
