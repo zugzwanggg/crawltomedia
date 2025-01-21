@@ -14,21 +14,19 @@ mediaRoute.get('/auth/instagram/callback', checkAuth, connectToInstagram);
 
 mediaRoute.get('/auth/google', googlePassport.authenticate('google', {scope: ['profile', 'email']}));
 mediaRoute.get('/auth/google/callback', googlePassport.authenticate('google', {session: false, failureRedirect: `${process.env.FRONTEND_BASE_URL}/login`}), (req,res)=> {
-    const userId =  req.query.user_id;
-
     if (!req.user) {
       return res.status(401).json({ message: 'Authentication failed' });
     }
 
-    if (!userId) {
-      const token = jwt.sign(req.user, process.env.JWT_SECRET);
-      res.cookie("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-        sameSite: 'none'
-      });
-    }
+    
+    const token = jwt.sign(req.user, process.env.JWT_SECRET);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      sameSite: 'none'
+    });
+    
 
     res.redirect(`${process.env.FRONTEND_BASE_URL}`)
 })
