@@ -49,6 +49,7 @@ const SocialApps = () => {
   }
 
   const handleSearchApp = async () => {
+    if (search === "") return;
     try {
       const res = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/searchApp?q=${search}`);
 
