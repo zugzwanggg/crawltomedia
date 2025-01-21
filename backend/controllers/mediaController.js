@@ -63,7 +63,7 @@ export const connectToInstagram = async (req,res) => {
 
     res.redirect(`${process.env.FRONTEND_BASE_URL}/settings/apps`)
   } catch (error) {
-    console.log('Error at connectToInstagram');
+    console.log('Error at connectToInstagram', error);
     res.status(500).send(error)
   }
 }
