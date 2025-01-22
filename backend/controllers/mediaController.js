@@ -15,6 +15,33 @@ export const getStatistics = async (req,res) => {
   }
 }
 
+export const getInstaStatistics = async (req, res) => {
+  const { user_id, app_id } = req.params;
+  try {
+
+    const instaData = await db.query("SELECT * FROM user_apps WHERE user_id = $1 AND app_id = $2", [user_id, app_id]);
+
+    const instaUserId = instaData.rows[0].media_user_id;
+    const accessToken = instaData.rows[0].access_token;
+
+    const response = await axios.get(`https://graph.facebook.com/v19.0/${instaUserId}/insights`,
+    {
+      params: {
+        metric: 'impressions,reach,profile_views',
+        period: 'day',
+        access_token: accessToken
+        }
+    }
+    );
+
+    res.status(200).json(response.data);
+    
+  } catch (error) {
+    console.log('Error at getInstaStatistics', error);
+    res.status(500).send(error)
+  }
+}
+
 export const disconnectUserApp = async (req,res) => {
   try {
 
