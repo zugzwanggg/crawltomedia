@@ -34,15 +34,20 @@ axios.defaults.withCredentials = true;
 import './utils/i18n';
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditions from "./pages/TermsAndConditions";
+import AppLoading from "./components/AppLoading";
 
 function App() {
   const dispatch = useAppDispatch();
-  const {lightMode, isAuth} = useAppSelector((state)=>state.user);
+  const {lightMode, isAuth, isLoading} = useAppSelector((state)=>state.user);
   
 
   useEffect(() => {
     dispatch(fetchUserIsAuth());
   }, [])
+
+  if (isLoading) {
+    return <AppLoading/>
+  }
   
 
   if (lightMode) {
