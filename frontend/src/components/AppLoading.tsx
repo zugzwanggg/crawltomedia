@@ -9,7 +9,7 @@ const AppLoading = () => {
         <img className="mx-auto w-20 rounded-lg mb-4 dark:hidden" src={logoLightIcon} alt="Logo" />
         <img className="mx-auto w-20 rounded-lg mb-4 hidden dark:block" src={logoIcon} alt="Logo" />
       </div>
-      <LuLoaderCircle className="text-4xl animate-spin" />
+      <LuLoaderCircle className="text-4xl animate-spin dark:text-white" />
     </div>
   )
 }
