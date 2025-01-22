@@ -1,5 +1,5 @@
 import {Router} from "express";
-import { connectToInstagram, disconnectUserApp, getStatistics } from "../controllers/mediaController.js";
+import { connectToInstagram, disconnectUserApp, getInstaStatistics, getStatistics } from "../controllers/mediaController.js";
 import {passport as googlePassport} from "../services/passport.js"
 import { checkAuth } from "../middlewares/checkAuth.js";
 
@@ -10,6 +10,7 @@ export const mediaRoute = Router();
 mediaRoute.delete('/api/disconnectApp/:user_id', disconnectUserApp);
 
 mediaRoute.get('/api/getStatistics/:user_id', checkAuth, getStatistics);
+mediaRoute.get('/api/getInstaStatistics/:user_id/:app_id', getInstaStatistics);
 mediaRoute.get('/auth/instagram/callback', checkAuth, connectToInstagram);
 
 mediaRoute.get('/auth/google', googlePassport.authenticate('google', {scope: ['profile', 'email']}));
