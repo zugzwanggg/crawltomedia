@@ -167,7 +167,7 @@ const Posts = () => {
               return <Post key={post.id} id={post.id} title={post.title} logo_path={post.logo_path}/>
             })
             :
-            <p className="py-10 w-full">
+            <p className="py-10 w-full text-center">
               {isLoading ? '' : t('empty')}
             </p>
           }
