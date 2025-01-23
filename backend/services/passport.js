@@ -18,7 +18,7 @@ async (req, accessToken, refreshToken, profile, done) => {
     const { userId } = JSON.parse(req.query.state || '{}');
     const userDataById = await db.query("SELECT * FROM users WHERE id = $1", [userId]);
     if (userDataById.rows.length > 0) {
-      const checkUserApps = await db.query(checkUserAppsById, [userDataById.rows[0].id])
+      const checkUserApps = await db.query(checkUserAppsById, [userDataById.rows[0].id, 2])
       if (checkUserApps.rows.length === 0) {
         await db.query(insertIntoApps, [userDataById.rows[0].id, accessToken, refreshToken, profile.id]);
       }
@@ -27,7 +27,7 @@ async (req, accessToken, refreshToken, profile, done) => {
 
     const checkUser = await db.query("SELECT id, google_id, username, email, user_pic, verified FROM users WHERE google_id = $1", [profile.id]);
     if (checkUser.rows.length > 0) {
-      const checkUserApps = await db.query(checkUserAppsById, [checkUser.rows[0].id])
+      const checkUserApps = await db.query(checkUserAppsById, [checkUser.rows[0].id, 2])
       if (checkUserApps.rows.length === 0) {
         await db.query(insertIntoApps, [checkUser.rows[0].id, accessToken, refreshToken, profile.id]);
       }
