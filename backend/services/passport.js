@@ -14,7 +14,7 @@ async (req, accessToken, refreshToken, profile, done) => {
   const insertIntoApps = "INSERT INTO user_apps (user_id, app_id, access_token, refresh_token, media_user_id) VALUES($1, 2, $2, $3, $4)"
   const checkUserAppsById = "SELECT * FROM user_apps WHERE user_id = $1 AND app_id = $2";
   try {
-    const userId = JSON.parse(req.query.state || '{}');
+    const { userId } = JSON.parse(req.query.state || '{}');
     const userDataById = await db.query("SELECT * FROM users WHERE id = $1", [userId]);
     if (userDataById.rows.length > 0) {
       const checkUserApps = await db.query(checkUserAppsById, [userDataById.rows[0].id])

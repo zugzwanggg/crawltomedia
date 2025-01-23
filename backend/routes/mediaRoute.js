@@ -13,7 +13,7 @@ mediaRoute.get('/api/getStatistics/:user_id', checkAuth, getStatistics);
 mediaRoute.get('/api/getInstaStatistics/:user_id/:app_id', getInstaStatistics);
 mediaRoute.get('/auth/instagram/callback', checkAuth, connectToInstagram);
 
-mediaRoute.get('/auth/google', (req,res, next) => googlePassport.authenticate('google', {scope: ['profile', 'email'], state: JSON.stringify(req.query.state)})(req, res, next));
+mediaRoute.get('/auth/google', (req,res, next) => googlePassport.authenticate('google', {scope: ['profile', 'email'], state: JSON.stringify({ userId: req.query.state })})(req, res, next));
 mediaRoute.get('/auth/google/callback', googlePassport.authenticate('google', {session: false, failureRedirect: `${process.env.FRONTEND_BASE_URL}/login`}), (req,res)=> {
     if (!req.user) {
       return res.status(401).json({ message: 'Authentication failed' });
