@@ -152,10 +152,19 @@ const SocialApps = () => {
           
                         <p className="text-sm font-semibold">{app?.name}</p>
                       </div>
-                      <Link to={`${app.oauth_link}${app.oauth_link.includes('?') ? '&' : '?'}state=${userId}`} className="flex items-center text-sm py-1 gap-2 shadow-lg bg-white text-darkPrimaryColor p-2 rounded duration-500 hover:opacity-85">
-                        {t('connect_btn')}
-                        <PiPlugsConnectedBold className="text-lg lg:text-2xl"/>
-                      </Link>
+                      {
+                        userData.some(item => item.id === app.id)
+                        ?
+                        <button onClick={handleDisconnect} className="flex text-sm items-center gap-2 bg-grayColor text-white py-1 px-2 rounded duration-500 hover:opacity-85">
+                          {t('disconnect_btn')}
+                          <TbPlugConnected className="text-lg lg:text-2xl"/>
+                        </button>
+                        :
+                        <Link to={`${app.oauth_link}${app.oauth_link.includes('?') ? '&' : '?'}state=${userId}`} className="flex items-center text-sm py-1 gap-2 shadow-lg bg-white text-darkPrimaryColor p-2 rounded duration-500 hover:opacity-85">
+                          {t('connect_btn')}
+                          <PiPlugsConnectedBold className="text-lg lg:text-2xl"/>
+                        </Link>
+                      }
                         
                     </li>
             })
