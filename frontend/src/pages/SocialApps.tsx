@@ -59,10 +59,10 @@ const SocialApps = () => {
     }
   }
 
-  const handleDisconnect = async () => {
+  const handleDisconnect = async (app_id: number | string) => {
     try {
       
-      await axios.delete(`${import.meta.env.VITE_BACKEND_BASE_URL}/disconnectApp/${userId}`);
+      await axios.delete(`${import.meta.env.VITE_BACKEND_BASE_URL}/disconnectApp/${userId}/${app_id}`);
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -111,7 +111,7 @@ const SocialApps = () => {
                 <p className="text-sm font-semibold">{userApp?.name}</p>
               </div>
 
-              <button onClick={handleDisconnect} className="flex text-sm items-center gap-2 bg-grayColor text-white py-1 px-2 rounded duration-500 hover:opacity-85">
+              <button onClick={()=>handleDisconnect(userApp.id)} className="flex text-sm items-center gap-2 bg-grayColor text-white py-1 px-2 rounded duration-500 hover:opacity-85">
                 {t('disconnect_btn')}
                 <TbPlugConnected className="text-lg lg:text-2xl"/>
               </button>
@@ -155,7 +155,7 @@ const SocialApps = () => {
                       {
                         userData.some(item => item.id === app.id)
                         ?
-                        <button onClick={handleDisconnect} className="flex text-sm items-center gap-2 bg-grayColor text-white py-1 px-2 rounded duration-500 hover:opacity-85">
+                        <button onClick={()=>handleDisconnect(app.id)} className="flex text-sm items-center gap-2 bg-grayColor text-white py-1 px-2 rounded duration-500 hover:opacity-85">
                           {t('disconnect_btn')}
                           <TbPlugConnected className="text-lg lg:text-2xl"/>
                         </button>
