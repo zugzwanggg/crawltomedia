@@ -160,7 +160,7 @@ const SocialApps = () => {
                     </li>
             })
           :
-          t('settings.medias.apps_null')
+          t('empty')
         }
         
         
