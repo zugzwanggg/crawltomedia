@@ -8,7 +8,8 @@ dotenv.config();
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLOUD_ID,
   clientSecret: process.env.GOOGLE_CLOUD_KEY,
-  callbackURL: `${process.env.BASE_URL}auth/google/callback`
+  callbackURL: `${process.env.BASE_URL}auth/google/callback`,
+  passReqToCallback: true
 },
 async (req, accessToken, refreshToken, profile, done) => {
   const insertIntoApps = "INSERT INTO user_apps (user_id, app_id, access_token, refresh_token, media_user_id) VALUES($1, 2, $2, $3, $4)"
