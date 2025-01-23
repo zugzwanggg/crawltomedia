@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken";
 
 export const mediaRoute = Router();
 
-mediaRoute.delete('/api/disconnectApp/:user_id', disconnectUserApp);
+mediaRoute.delete('/api/disconnectApp/:user_id/:app_id', disconnectUserApp);
 
 mediaRoute.get('/api/getStatistics/:user_id', checkAuth, getStatistics);
 mediaRoute.get('/api/getInstaStatistics/:user_id/:app_id', getInstaStatistics);

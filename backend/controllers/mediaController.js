@@ -45,8 +45,8 @@ export const getInstaStatistics = async (req, res) => {
 export const disconnectUserApp = async (req,res) => {
   try {
 
-    const {user_id} = req.params;
-    await db.query("DELETE FROM user_apps WHERE user_id = $1", [user_id]);
+    const {user_id, app_id} = req.params;
+    await db.query("DELETE FROM user_apps WHERE user_id = $1 AND app_id = $2", [user_id, app_id]);
 
     res.status(204).json({
       message: "Succesfully disconnected"
