@@ -4,37 +4,29 @@ import { db } from "../db.js";
 import dotenv from "dotenv";
 dotenv.config();
 
-const checkUserId = async (req,res) => {
-  try {
-    const userId = req.query.user_id;
-    
-    const user = await db.query("SELECT * FROM users WHERE id = $1", [userId]);
-
-    return user;
-  } catch (err) {
-    console.log('Error at passport checkUserId', err);
-    res.status(500).send(err)
-  }
-}
 
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLOUD_ID,
   clientSecret: process.env.GOOGLE_CLOUD_KEY,
   callbackURL: `${process.env.BASE_URL}auth/google/callback`
 },
-async (accessToken, refreshToken, profile, done) => {
+async (req, accessToken, refreshToken, profile, done) => {
   const insertIntoApps = "INSERT INTO user_apps (user_id, app_id, access_token, refresh_token, media_user_id) VALUES($1, 2, $2, $3, $4)"
-
+  const checkUserAppsById = "SELECT * FROM user_apps WHERE user_id = $1 AND app_id = $2";
   try {
-    // const userId = checkUserId();
-    // if (userId.rows.length > 0) {
-    //   await db.query(insertIntoApps, [userId.rows[0].id, accessToken, refreshToken, profile.id]);
-    //   return done(null, userId.rows[0])
-    // }
+    const userId = req.query.state;
+    const userDataById = await db.query("SELECT * FROM users WHERE id = $1", [userId]);
+    if (userDataById.rows.length > 0) {
+      const checkUserApps = await db.query(checkUserAppsById, [userDataById.rows[0].id])
+      if (checkUserApps.rows.length === 0) {
+        await db.query(insertIntoApps, [userDataById.rows[0].id, accessToken, refreshToken, profile.id]);
+      }
+      return done(null, userDataById.rows[0])
+    }
 
     const checkUser = await db.query("SELECT id, google_id, username, email, user_pic, verified FROM users WHERE google_id = $1", [profile.id]);
     if (checkUser.rows.length > 0) {
-      const checkUserApps = await db.query("SELECT * FROM user_apps WHERE user_id = $1", [checkUser.rows[0].id])
+      const checkUserApps = await db.query(checkUserAppsById, [checkUser.rows[0].id])
       if (checkUserApps.rows.length === 0) {
         await db.query(insertIntoApps, [checkUser.rows[0].id, accessToken, refreshToken, profile.id]);
       }
