@@ -53,7 +53,17 @@ const SocMedias = () => {
     }
   }
 
-  getInstaStatistics()
+  const getYoutubeStatistics = async () => {
+    try {
+
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/getYoutubeStatistics/${userId}/2`)
+      console.log(res);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  getYoutubeStatistics();
 
   useEffect(()=> {
     fetchUserApps();
