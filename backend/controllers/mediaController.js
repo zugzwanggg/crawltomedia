@@ -15,6 +15,32 @@ export const getStatistics = async (req,res) => {
   }
 }
 
+export const getYoutubeStatistics = async (req,res) => {
+  try {
+    
+    const { user_id, app_id } = req.params;
+    const data = await db.query("SELECT * FROM user_apps WHERE user_id = $1 AND app_id = $2", [user_id, app_id]);
+
+    const dataMediaUserId = data.rows[0].media_user_id;
+    const accessToken = data.rows[0].access_token;
+
+    const response = `https://youtubeanalytics.googleapis.com/v2/reports
+    ?ids=channel==MINE
+    &startDate=2025-01-01
+    &endDate=2025-01-10
+    &metrics=views,likes,comments,subscribersGained
+    &dimensions=day
+    &access_token=${accessToken}
+    `
+
+    res.status(200).json(response)
+
+  } catch (error) {
+    console.log('Error at getYoutubeStatistics', error);
+    res.status(500).send(error)
+  }
+}
+
 export const getInstaStatistics = async (req, res) => {
   const { user_id, app_id } = req.params;
   try {
