@@ -40,18 +40,18 @@ const SocMedias = () => {
     }
   }
 
-  const getInstaStatistics =async () => {
-    try {
+  // const getInstaStatistics =async () => {
+  //   try {
 
-      const res = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/getInstaStatistics/${userId}/1`);
+  //     const res = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/getInstaStatistics/${userId}/1`);
 
-      console.log(res.data);
+  //     console.log(res.data);
       
       
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   const getYoutubeStatistics = async () => {
     try {
