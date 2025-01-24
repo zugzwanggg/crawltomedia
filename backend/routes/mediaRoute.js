@@ -14,7 +14,10 @@ mediaRoute.get('/api/getInstaStatistics/:user_id/:app_id', getInstaStatistics);
 mediaRoute.get('/auth/instagram/callback', checkAuth, connectToInstagram);
 
 mediaRoute.get('/auth/google', (req,res, next) => googlePassport.authenticate('google', 
-{scope: ['profile', 'email', 'https://www.googleapis.com/auth/yt-analytics.readonly','https://www.googleapis.com/auth/youtube.readonly' ], 
+{scope: ['profile', 'email', 'https://www.googleapis.com/auth/yt-analytics.readonly',
+'https://www.googleapis.com/auth/youtube.readonly',
+'https://www.googleapis.com/auth/youtube.upload', 
+'https://www.googleapis.com/auth/youtube.force-ssl' ], 
 state: JSON.stringify({ userId: req.query.state })
 })(req, res, next));
 mediaRoute.get('/auth/google/callback', googlePassport.authenticate('google', {session: false, failureRedirect: `${process.env.FRONTEND_BASE_URL}/login`}), (req,res)=> {
