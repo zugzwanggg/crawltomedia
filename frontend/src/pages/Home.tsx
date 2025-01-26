@@ -16,7 +16,7 @@ const Home = () => {
 
   const [userData, setUserData] = useState<TypeApp[]>([]);
   const {user} = useAppSelector(state=>state.user);
-  const userId = user?.id;
+  const userId = user?.id!;
 
   const fetchUserApps = async () => {
     try {
@@ -76,7 +76,7 @@ const Home = () => {
         </div>
         <div className="flex flex-wrap w-full md:flex-row md:flex-nowrap lg:flex-col lg:w-1/3 gap-4">
           <SocMedias/>
-          <DailyStats/>
+          <DailyStats currentApp={currentStats} userId={userId}/>
         </div>
       </div>
     </div>

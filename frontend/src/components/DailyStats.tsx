@@ -1,12 +1,51 @@
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 // icons
 import { FaRegEye } from "react-icons/fa";
 import { FiUserPlus } from "react-icons/fi";
 import { BiLike } from "react-icons/bi";
 
-const DailyStats = () => {
+type Params = {
+  currentApp: string,
+  userId: number | string
+}
+
+const DailyStats = ({currentApp, userId}:Params) => {
   const {t} = useTranslation();
+  const [data,setData] = useState([]);
+  console.log(data);
+
+  const getInstaStats = async () => {
+    try {
+
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/getInstaStatistics/${userId}/1`);
+
+      setData(response.data)
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const getYoutubeStatistics = async () => {
+    try {
+
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/getYoutubeStatistics/${userId}/2`)
+      console.log(res);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    if (currentApp === 'Instagram') {
+      getInstaStats();
+    } else if (currentApp === 'YouTube') {
+      getYoutubeStatistics();
+    }
+  }, [currentApp])
 
   return (
     <div className="bg-primaryColor shadow-lg dark:bg-darkPrimaryColor grid gap-4 p-6 rounded w-full h-fit">
