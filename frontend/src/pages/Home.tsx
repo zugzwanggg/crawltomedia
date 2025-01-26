@@ -22,7 +22,6 @@ const Home = () => {
   const userId = user?.id!;
 
   const [data, setData] = useState<IMediaStats[]>([]);
-  console.log(data);
   
 
   const fetchUserApps = async () => {
@@ -41,7 +40,7 @@ const Home = () => {
 
       const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/getInstaStatistics/${userId}/1`);
 
-      setData(response.data)
+      setData(response.data.data)
       
     } catch (error) {
       console.log(error);
@@ -52,7 +51,7 @@ const Home = () => {
     try {
 
       const res = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/getYoutubeStatistics/${userId}/2`)
-      setData(res.data)
+      setData(res.data.data)
       
     } catch (error) {
       console.log(error)
