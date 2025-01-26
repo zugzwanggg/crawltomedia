@@ -64,7 +64,7 @@ const LineGraph = ({stats}:Params) => {
   return (
     <>
       <h2 className='font-semibold text-2xl mt-10'>Views</h2>
-      <Line options={options} data={data} className='max-w-full shadow-lg bg-gray-800 p-6 rounded mt-3'/>
+      <Line options={options} data={data} className='max-w-full shadow-lg bg-gray-800 text-sm md:text-base md:p-6 rounded mt-3'/>
     </>
   )
 }
