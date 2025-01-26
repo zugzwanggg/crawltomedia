@@ -34,6 +34,10 @@ export const getYoutubeStatistics = async (req,res) => {
   }
 }
 
+function formatDate(date) {
+  return date.toISOString().split('T')[0];
+}
+
 export const getInstaStatistics = async (req, res) => {
   const { user_id, app_id } = req.params;
   try {
@@ -43,11 +47,18 @@ export const getInstaStatistics = async (req, res) => {
     const instaUserId = instaData.rows[0].media_user_id;
     const accessToken = instaData.rows[0].access_token;
 
-    const response = await axios.get(`https://graph.facebook.com/v19.0/${instaUserId}/insights`,
+    const today = new Date();
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(today.getDate() - 7);
+
+
+    const response = await axios.get(`https://graph.instagram.com/${instaUserId}/insights`,
     {
       params: {
-        metric: 'impressions,reach,profile_views',
+        metric: 'impressions,reach,views,follower_count',
         period: 'day',
+        since: formatDate(sevenDaysAgo),
+        until: formatDate(today),
         access_token: accessToken
         }
     }
