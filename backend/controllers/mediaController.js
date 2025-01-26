@@ -86,7 +86,14 @@ export const getInstaStatistics = async (req, res) => {
         access_token: accessToken
         }
     }
-    )
+    );
+
+    if (response.data.error) {
+      console.error("Instagram API error:", response.data.error);
+      return res.status(500).json({ message: "Error fetching Instagram data" });
+    }
+
+    // Extracting and formatting response data like YouTube format
     const metricMapping = {
       impressions: "views",
       reach: "likes",
@@ -94,26 +101,29 @@ export const getInstaStatistics = async (req, res) => {
       follower_count: "subscribersGained"
     };
 
-    const formattedData = response.data.data.map((metric) => {
-      return metric.values.map((value) => ({
-        [metricMapping[metric.name]]: value.value || 0 
-      }));
-    });
+    const rows = [];
+    const dateLabels = [];
 
-    const mergedData = formattedData.reduce((acc, curr) => {
-      curr.forEach(entry => {
-        const date = entry.date;
-        if (!acc[date]) {
-          acc[date] = { date, views: 0, likes: 0, comments: 0, subscribersGained: 0 };
+    response.data.data.forEach((metric) => {
+      metric.values.forEach((value, index) => {
+        if (!rows[index]) rows[index] = [0, 0, 0, 0];
+        rows[index][Object.keys(metricMapping).indexOf(metric.name)] = value.value || 0;
+
+        if (!dateLabels[index]) {
+          dateLabels[index] = value.end_time; 
         }
-        Object.assign(acc[date], entry);
       });
-      return acc;
-    }, {});
+    });
 
     const formattedResponse = {
       app: 'Instagram',
-      data: Object.values(mergedData)
+      data: rows.map((row, index) => ({
+        date: dateLabels[index],
+        views: row[0],
+        likes: row[1],
+        comments: row[2],
+        subscribersGained: row[3]
+      }))
     };
 
     res.status(200).json(formattedResponse);
