@@ -20,7 +20,14 @@ ChartJS.register(
   Legend
 )
 
-const LineGraph = () => {
+// types
+import { IMediaStats } from '../types';
+
+type Params = {
+  stats: IMediaStats[]
+}
+
+const LineGraph = ({stats}:Params) => {
   const options = {
     responsive: true,
     plugins: {
@@ -42,7 +49,7 @@ const LineGraph = () => {
     datasets: [
       {
         label: "Views",
-        data: [2000, 4000, 5000, 7000, 5000, 6000],
+        data: [stats[0].views, stats[1].views, stats[2].views, stats[4].views, stats[5].views, stats[6].views],
         borderColor: "rgb(75, 192, 192)"
       }
     ]

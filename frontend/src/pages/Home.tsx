@@ -41,7 +41,7 @@ const Home = () => {
 
       const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/getInstaStatistics/${userId}/1`);
 
-      setData(response.data.data)
+      setData(response.data)
       
     } catch (error) {
       console.log(error);
@@ -110,7 +110,7 @@ const Home = () => {
               })
             }
           </ul>
-          <LineGraph/>
+          <LineGraph stats={data}/>
         </div>
         <div className="flex flex-wrap w-full md:flex-row md:flex-nowrap lg:flex-col lg:w-1/3 gap-4">
           <SocMedias/>
