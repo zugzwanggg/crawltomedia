@@ -37,6 +37,7 @@ export const getYoutubeStatistics = async (req,res) => {
       params: {
         ids: 'channel==MINE',
         metrics: 'views,likes,comments,subscribersGained',
+        dimensions: 'day',
         startDate: formatDate(sevenDaysAgo),
         endDate: formatDate(today),
         access_token: accessToken
