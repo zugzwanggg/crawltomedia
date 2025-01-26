@@ -43,7 +43,7 @@ export const getYoutubeStatistics = async (req,res) => {
       }
     })
 
-    res.status(200).json(response)
+    res.status(200).json(response.data)
 
   } catch (error) {
     console.log('Error at getYoutubeStatistics', error);
