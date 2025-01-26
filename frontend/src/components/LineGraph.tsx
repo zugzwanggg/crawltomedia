@@ -49,7 +49,9 @@ const LineGraph = ({stats}:Params) => {
     datasets: [
       {
         label: "Views",
-        data: [stats[0].views, stats[1].views, stats[2].views, stats[4].views, stats[5].views, stats[6].views],
+        data: [stats[0]?.views || 0, 
+        stats[1]?.views || 0, 
+        stats[2]?.views || 0, stats[4]?.views || 0, stats[5]?.views || 0, stats[6]?.views || 0],
         borderColor: "rgb(75, 192, 192)"
       }
     ]
