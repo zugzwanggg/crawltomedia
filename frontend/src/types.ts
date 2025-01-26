@@ -33,6 +33,11 @@ export interface INotification {
   created_at: Date
 }
 
+export interface IMediaData {
+  app: string,
+  data: IMediaStats[]
+}
+
 export interface IMediaStats {
   views: number,
   likes: number,
