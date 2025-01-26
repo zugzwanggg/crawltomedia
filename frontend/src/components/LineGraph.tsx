@@ -47,6 +47,20 @@ const LineGraph = () => {
     }
   }
 
+  const getInstaStats =async () => {
+    try {
+
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/getInstaStatistics/${userId}/1`);
+      console.log(res);
+
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
+  getInstaStats();
+
   useEffect(()=> {
     fetchUserApps();
   }, [])
