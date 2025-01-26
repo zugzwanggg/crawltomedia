@@ -11,49 +11,13 @@ import { BiLike } from "react-icons/bi";
 import { IMediaStats } from "../types";
 
 type Params = {
-  currentApp: string,
-  userId: number | string
+  data: IMediaStats
 }
 
-const DailyStats = ({currentApp, userId}:Params) => {
+const DailyStats = ({data}:Params) => {
   const {t} = useTranslation();
-  const [data,setData] = useState<IMediaStats|null>(null);
-  console.log(data);
 
-  const getInstaStats = async () => {
-    try {
-
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/getInstaStatistics/${userId}/1`);
-
-      setData(response.data.data[0])
-      
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  const getYoutubeStatistics = async () => {
-    try {
-
-      const res = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/getYoutubeStatistics/${userId}/2`)
-      if (res.data.rows[6]) {
-        setData(res.data.rows[6])
-      } else {
-        setData(null)
-      }
-      
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-    if (currentApp === 'Instagram') {
-      getInstaStats();
-    } else if (currentApp === 'YouTube') {
-      getYoutubeStatistics();
-    }
-  }, [currentApp])
+  
 
   return (
     <div className="bg-primaryColor shadow-lg dark:bg-darkPrimaryColor grid gap-4 p-6 rounded w-full h-fit">

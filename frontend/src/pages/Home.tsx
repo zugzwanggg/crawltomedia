@@ -10,6 +10,9 @@ import { useTranslation } from "react-i18next"
 import { TypeApp } from '../types';
 import { useAppSelector } from '../app/hooks';
 
+// types
+import { IMediaStats } from "../types";
+
 const Home = () => {
   const {t} = useTranslation();
   const [currentStats, setCurrentStats] = useState('overall');
@@ -17,6 +20,10 @@ const Home = () => {
   const [userData, setUserData] = useState<TypeApp[]>([]);
   const {user} = useAppSelector(state=>state.user);
   const userId = user?.id!;
+
+  const [data, setData] = useState<IMediaStats[]>([]);
+  console.log(data);
+  
 
   const fetchUserApps = async () => {
     try {
@@ -28,6 +35,37 @@ const Home = () => {
       console.log(error);
     }
   }
+
+  const getInstaStats = async () => {
+    try {
+
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/getInstaStatistics/${userId}/1`);
+
+      setData(response.data.data)
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const getYoutubeStatistics = async () => {
+    try {
+
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/getYoutubeStatistics/${userId}/2`)
+      setData(res.data)
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    if (currentStats === 'Instagram') {
+      getInstaStats();
+    } else if (currentStats === 'YouTube') {
+      getYoutubeStatistics();
+    }
+  }, [currentStats])
 
   useEffect(()=> {
     fetchUserApps();
@@ -76,7 +114,7 @@ const Home = () => {
         </div>
         <div className="flex flex-wrap w-full md:flex-row md:flex-nowrap lg:flex-col lg:w-1/3 gap-4">
           <SocMedias/>
-          <DailyStats currentApp={currentStats} userId={userId}/>
+          <DailyStats data={data[6]}/>
         </div>
       </div>
     </div>
