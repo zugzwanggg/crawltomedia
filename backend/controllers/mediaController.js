@@ -15,6 +15,10 @@ export const getStatistics = async (req,res) => {
   }
 }
 
+function formatDate(date) {
+  return date.toISOString().split('T')[0];
+}
+
 export const getYoutubeStatistics = async (req,res) => {
   try {
     
@@ -24,7 +28,20 @@ export const getYoutubeStatistics = async (req,res) => {
     const dataMediaUserId = data.rows[0].media_user_id;
     const accessToken = data.rows[0].access_token;
 
-    const response = `https://youtubeanalytics.googleapis.com/v2/reports?ids=channel==MINE&startDate=2025-01-01&endDate=2025-01-10&metrics=views,likes,comments,subscribersGained&dimensions=day&access_token=${accessToken}`
+    const today = new Date();
+
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(today.getDate() - 7);
+
+    const response = await axios.get(`https://youtubeanalytics.googleapis.com/v2/reports`, {
+      params: {
+        ids: 'channel==MINE',
+        metrics: 'views,likes,comments,subscribersGained',
+        startDate: formatDate(sevenDaysAgo),
+        endDate: formatDate(today),
+        access_token: accessToken
+      }
+    })
 
     res.status(200).json(response)
 
@@ -32,10 +49,6 @@ export const getYoutubeStatistics = async (req,res) => {
     console.log('Error at getYoutubeStatistics', error);
     res.status(500).send(error)
   }
-}
-
-function formatDate(date) {
-  return date.toISOString().split('T')[0];
 }
 
 export const getInstaStatistics = async (req, res) => {
