@@ -11,7 +11,7 @@ import { TypeApp } from '../types';
 import { useAppSelector } from '../app/hooks';
 
 // types
-import { IMediaData } from "../types";
+import { IMediaStats } from "../types";
 
 const Home = () => {
   const {t} = useTranslation();
@@ -21,7 +21,7 @@ const Home = () => {
   const {user} = useAppSelector(state=>state.user);
   const userId = user?.id!;
 
-  const [data, setData] = useState<IMediaData|null>(null);
+  const [data, setData] = useState<IMediaStats[]>([]);
   console.log(data);
   
 
@@ -110,11 +110,11 @@ const Home = () => {
               })
             }
           </ul>
-          <LineGraph stats={data?.data!}/>
+          <LineGraph stats={data}/>
         </div>
         <div className="flex flex-wrap w-full md:flex-row md:flex-nowrap lg:flex-col lg:w-1/3 gap-4">
           <SocMedias/>
-          <DailyStats data={data?.data[6]!}/>
+          <DailyStats data={data[6]}/>
         </div>
       </div>
     </div>
