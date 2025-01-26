@@ -7,6 +7,9 @@ import { FaRegEye } from "react-icons/fa";
 import { FiUserPlus } from "react-icons/fi";
 import { BiLike } from "react-icons/bi";
 
+// types
+import { IMediaStats } from "../types";
+
 type Params = {
   currentApp: string,
   userId: number | string
@@ -14,7 +17,7 @@ type Params = {
 
 const DailyStats = ({currentApp, userId}:Params) => {
   const {t} = useTranslation();
-  const [data,setData] = useState([]);
+  const [data,setData] = useState<IMediaStats|null>(null);
   console.log(data);
 
   const getInstaStats = async () => {
@@ -36,7 +39,7 @@ const DailyStats = ({currentApp, userId}:Params) => {
       if (res.data.rows[6]) {
         setData(res.data.rows[6])
       } else {
-        setData([])
+        setData(null)
       }
       
     } catch (error) {
@@ -66,7 +69,7 @@ const DailyStats = ({currentApp, userId}:Params) => {
             </p>
           </div>
           <span className="text-2xl">
-            0
+            {data?.views}
           </span>
         </li>
         <li className="flex items-center justify-between gap-6">
@@ -78,7 +81,7 @@ const DailyStats = ({currentApp, userId}:Params) => {
             </p>
           </div>
           <span className="text-2xl">
-            0
+          {data?.subscribersGained}
           </span>
         </li>
         <li className="flex items-center justify-between gap-6">
@@ -90,7 +93,7 @@ const DailyStats = ({currentApp, userId}:Params) => {
             </p>
           </div>
           <span className="text-2xl">
-            0
+          {data?.likes}
           </span>
         </li>
       </ul>

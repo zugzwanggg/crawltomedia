@@ -32,3 +32,10 @@ export interface INotification {
   content: string,
   created_at: Date
 }
+
+export interface IMediaStats {
+  views: number,
+  likes: number,
+  comments: number,
+  subscribersGained: number
+}
