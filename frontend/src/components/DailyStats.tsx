@@ -25,7 +25,7 @@ const DailyStats = ({currentApp, userId}:Params) => {
 
       const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/getInstaStatistics/${userId}/1`);
 
-      setData(response.data)
+      setData(response.data.data)
       
     } catch (error) {
       console.log(error);
