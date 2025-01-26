@@ -87,7 +87,36 @@ export const getInstaStatistics = async (req, res) => {
         }
     }
     )
-    res.status(200).json(response.data);
+    const metricMapping = {
+      impressions: "views",
+      reach: "likes",
+      profile_views: "comments",
+      follower_count: "subscribersGained"
+    };
+
+    const formattedData = response.data.data.map((metric) => {
+      return metric.values.map((value) => ({
+        [metricMapping[metric.name]]: value.value || 0 
+      }));
+    });
+
+    const mergedData = formattedData.reduce((acc, curr) => {
+      curr.forEach(entry => {
+        const date = entry.date;
+        if (!acc[date]) {
+          acc[date] = { date, views: 0, likes: 0, comments: 0, subscribersGained: 0 };
+        }
+        Object.assign(acc[date], entry);
+      });
+      return acc;
+    }, {});
+
+    const formattedResponse = {
+      app: 'Instagram',
+      data: Object.values(mergedData)
+    };
+
+    res.status(200).json(formattedResponse);
     
   } catch (error) {
     console.log('Error at getInstaStatistics', error);
