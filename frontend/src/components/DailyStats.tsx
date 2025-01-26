@@ -1,6 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
 // icons
 import { FaRegEye } from "react-icons/fa";
