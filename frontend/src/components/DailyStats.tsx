@@ -33,7 +33,12 @@ const DailyStats = ({currentApp, userId}:Params) => {
     try {
 
       const res = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/getYoutubeStatistics/${userId}/2`)
-      console.log(res);
+      if (res.data.rows[6]) {
+        setData(res.data.rows[6])
+      } else {
+        setData([])
+      }
+      
     } catch (error) {
       console.log(error)
     }

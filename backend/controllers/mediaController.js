@@ -44,7 +44,17 @@ export const getYoutubeStatistics = async (req,res) => {
       }
     })
 
-    res.status(200).json(response.data)
+    const formattedResponse = {
+      app: 'YouTube',
+      data: response.data.rows.map(row => ({
+        views: row[1], 
+        likes: row[2], 
+        comments: row[3], 
+        subscribersGained: row[4]
+      }))
+    }
+
+    res.status(200).json(formattedResponse)
 
   } catch (error) {
     console.log('Error at getYoutubeStatistics', error);
@@ -76,8 +86,7 @@ export const getInstaStatistics = async (req, res) => {
         access_token: accessToken
         }
     }
-    );
-
+    )
     res.status(200).json(response.data);
     
   } catch (error) {
