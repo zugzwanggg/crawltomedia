@@ -28,6 +28,10 @@ type Params = {
 }
 
 const LineGraph = ({stats}:Params) => {
+
+  console.log(stats);
+  
+
   const options = {
     responsive: true,
     plugins: {
