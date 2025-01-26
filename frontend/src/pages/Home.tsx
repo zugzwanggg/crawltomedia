@@ -11,7 +11,7 @@ import { TypeApp } from '../types';
 import { useAppSelector } from '../app/hooks';
 
 // types
-import { IMediaStats, IMediaData } from "../types";
+import { IMediaData } from "../types";
 
 const Home = () => {
   const {t} = useTranslation();
