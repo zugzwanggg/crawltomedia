@@ -8,7 +8,7 @@ export const getStatistics = async (req,res) => {
 
     const { user_id } = req.params;
     
-    const result = await db.query("SELECT * FROM user_apps WHERE user_id = $1", [user_id]);
+    const result = await db.query("SELECT user_apps.media_user_id, user_apps.access_token, apps.name FROM user_apps JOIN apps ON apps.id = user_apps.app_id  WHERE user_id = $1", [user_id]);
 
     if (result.rows.length === 0) {
       return res.status(404).json({
