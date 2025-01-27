@@ -1,14 +1,48 @@
 import { db } from "../db.js";
 import axios from "axios";
-import { statistics } from "../helpers/platforms.js";
+import { STATISTICS } from "../helpers/platforms.js";
 import qs from 'qs';
 
 export const getStatistics = async (req,res) => {
   try {
 
     const { user_id } = req.params;
-    const statistics = await axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2Cstatistics&id=Ks-_Mh1QhMc&key=${process.env.YOUTUBE_API_KEY}`);
-    res.status(200).json(statistics.data)
+    
+    const result = await db.query("SELECT * FROM user_apps WHERE user_id = $1", [user_id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        message: "No connect apps. Please, connect to one of them."
+      })
+    }
+
+    const today = new Date();
+
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(today.getDate() - 7);
+
+
+    const statsPromises = result.rows.map(async app => {
+      if (STATISTICS[app.name.toLowerCase()]) {
+        try {
+          
+          return await STATISTICS[app.name.toLowerCase()](app.media_user_id, formatDate(sevenDaysAgo), formatDate(today), app.access_token);
+
+        } catch (error) {
+          console.log('Error at getStatistics', error);
+          res.status(500).send(error)
+        }
+      }
+    })
+
+    const statsResults = await Promise.all(statsPromises);
+
+    return statsResults;
+
+
+
+
+    
   } catch (error) {
     console.log('Error at getStatistics', error);
     res.status(500).send(error)
