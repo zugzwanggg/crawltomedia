@@ -39,6 +39,7 @@ export interface IMediaData {
 }
 
 export interface IMediaStats {
+  date: Date,
   views: number,
   likes: number,
   comments: number,
