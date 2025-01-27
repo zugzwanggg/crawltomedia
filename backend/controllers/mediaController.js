@@ -214,6 +214,7 @@ export const connectToInstagram = async (req,res) => {
 
     await db.query("INSERT INTO user_apps (user_id, app_id, media_user_id, access_token) VALUES ($1, $2, $3, $4)", [userId, 1, userInstaId, accessToken]);
 
+    refreshInstaToken(userId, accessToken);
     res.redirect(`${process.env.FRONTEND_BASE_URL}/settings/apps`)
   } catch (error) {
     console.log('Error at connectToInstagram', error);
