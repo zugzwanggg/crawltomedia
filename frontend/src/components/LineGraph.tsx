@@ -20,14 +20,18 @@ ChartJS.register(
   Legend
 )
 
+// icons
+import { LuLoaderCircle } from "react-icons/lu";
+
 // types
 import { IMediaStats } from '../types';
 
 type Params = {
-  stats: IMediaStats[]
+  stats: IMediaStats[],
+  isLoading: boolean
 }
 
-const LineGraph = ({stats}:Params) => {
+const LineGraph = ({stats, isLoading}:Params) => {
 
   console.log(stats);
   
@@ -64,7 +68,16 @@ const LineGraph = ({stats}:Params) => {
   return (
     <>
       <h2 className='font-semibold text-2xl mt-10'>Views</h2>
-      <Line options={options} data={data} className='max-w-full shadow-lg bg-gray-800 text-sm md:text-base md:p-6 rounded mt-3'/>
+      <div className='relative'>
+        {
+          isLoading
+          ?
+          <LuLoaderCircle className='absolute top-9 left-1/2 -translate-x-1/2 text-3xl text-white animate-spin'/>
+          :
+          ''
+        }
+        <Line options={options} data={data} className='max-w-full shadow-lg bg-gray-800 text-sm md:text-base md:p-6 rounded mt-3'/>
+      </div>
     </>
   )
 }

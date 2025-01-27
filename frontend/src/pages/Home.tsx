@@ -23,6 +23,7 @@ const Home = () => {
 
   const [data, setData] = useState<IMediaStats[]>([]);
   
+  const [isLineChartLoading, setIsLineChartLoading] = useState(true);
 
   const fetchUserApps = async () => {
     try {
@@ -48,6 +49,7 @@ const Home = () => {
   }
 
   const getInstaStats = async () => {
+    setIsLineChartLoading(true)
     try {
 
       const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/getInstaStatistics/${userId}/1`);
@@ -56,10 +58,13 @@ const Home = () => {
       
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLineChartLoading(false)
     }
   }
 
   const getYoutubeStatistics = async () => {
+    setIsLineChartLoading(true)
     try {
 
       const res = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/getYoutubeStatistics/${userId}/2`)
@@ -67,6 +72,8 @@ const Home = () => {
       
     } catch (error) {
       console.log(error)
+    } finally {
+      setIsLineChartLoading(false)
     }
   }
 
@@ -124,7 +131,7 @@ const Home = () => {
               })
             }
           </ul>
-          <LineGraph stats={data}/>
+          <LineGraph stats={data} isLoading={isLineChartLoading}/>
         </div>
         <div className="flex flex-wrap w-full md:flex-row md:flex-nowrap lg:flex-col lg:w-1/3 gap-4">
           <SocMedias/>
