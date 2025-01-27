@@ -23,7 +23,7 @@ const Home = () => {
 
   const [data, setData] = useState<IMediaStats[]>([]);
   
-  const [isLineChartLoading, setIsLineChartLoading] = useState(true);
+  const [isLineChartLoading, setIsLineChartLoading] = useState(false);
 
   const fetchUserApps = async () => {
     try {
