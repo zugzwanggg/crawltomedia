@@ -15,7 +15,7 @@ import { IMediaStats } from "../types";
 
 const Home = () => {
   const {t} = useTranslation();
-  const [currentStats, setCurrentStats] = useState('overall');
+  const [currentStats, setCurrentStats] = useState('');
 
   const [userData, setUserData] = useState<TypeApp[]>([]);
   const {user} = useAppSelector(state=>state.user);
@@ -98,7 +98,7 @@ const Home = () => {
       <div className="flex flex-wrap lg:flex-nowrap px-2 gap-4">
         <div className='bg-primaryColor shadow-lg dark:bg-darkPrimaryColor w-full rounded-lg p-8 h-fit'>
           <ul className="flex items-center gap-2 py-2 overflow-x-auto">
-            <li onClick={()=> handleStatsChange('overall')} className={`
+            {/* <li onClick={()=> handleStatsChange('overall')} className={`
             ${
               currentStats == 'overall' 
               ? 
@@ -107,7 +107,7 @@ const Home = () => {
               ' bg-white dark:bg-grayColor'
               } px-4 py-2 rounded cursor-pointer shadow`}>
               {t('all')}
-            </li>
+            </li> */}
             {
               userData.map(app => {
                 return <li onClick={()=> handleStatsChange(app.name)} className={`
