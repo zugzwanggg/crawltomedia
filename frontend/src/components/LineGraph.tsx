@@ -26,6 +26,10 @@ import { LuLoaderCircle } from "react-icons/lu";
 // types
 import { IMediaStats } from '../types';
 
+// date-fns
+import { format, eachDayOfInterval } from 'date-fns';
+import { enUS } from 'date-fns/locale';
+
 type Params = {
   stats: IMediaStats[],
   isLoading: boolean
@@ -33,7 +37,9 @@ type Params = {
 
 const LineGraph = ({stats, isLoading}:Params) => {
 
-  console.log(stats);
+  const daysOfWeek = eachDayOfInterval({ start: new Date(), end: new Date(new Date().setDate(new Date().getDate() + 6)) });
+  
+  const weekdays = daysOfWeek.map((day) => format(day, 'EEE', { locale: enUS }));
   
 
   const options = {
@@ -47,13 +53,7 @@ const LineGraph = ({stats, isLoading}:Params) => {
 
   const data = {
     labels: [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday"
+      weekdays
     ],
     datasets: [
       {
