@@ -35,6 +35,18 @@ const Home = () => {
     }
   }
 
+  const getStats = async () => {
+    try {
+      
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/getStatistics/${userId}`);
+
+      console.log(response);
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const getInstaStats = async () => {
     try {
 
@@ -59,7 +71,10 @@ const Home = () => {
   }
 
   useEffect(() => {
-    if (currentStats === 'Instagram') {
+    if (currentStats === 'overall') {
+      getStats();
+    }
+    else if (currentStats === 'Instagram') {
       getInstaStats();
     } else if (currentStats === 'YouTube') {
       getYoutubeStatistics();
