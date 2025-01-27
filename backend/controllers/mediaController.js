@@ -220,3 +220,25 @@ export const connectToInstagram = async (req,res) => {
     res.status(500).send(error)
   }
 }
+
+
+export const refreshInstaToken = async (userId, access_token) => {
+  try {
+
+    const response = await axios.get('https://graph.instagram.com/refresh_access_token', {
+      params: {
+        grant_type: 'ig_refresh_token',
+        access_token: access_token
+      }
+    })
+
+    const newAccessToken = response.data.access_token;
+
+    await db.query('UPDATE user_apps SET access_token = $1 WHERE user_id = $2 AND app_id = 1', [newAccessToken, userId]);
+
+    return newAccessToken;
+  } catch (error) {
+    console.error('Failed to refresh Instagram token:', error.message);
+    throw new Error('Token refresh failed');
+  }
+}
