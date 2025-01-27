@@ -53,6 +53,7 @@ const LineGraph = ({stats, isLoading}:Params) => {
       "Thursday",
       "Friday",
       "Saturday",
+      "Sunday"
     ],
     datasets: [
       {
