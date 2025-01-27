@@ -53,7 +53,7 @@ const LineGraph = ({stats, isLoading}:Params) => {
 
   const data = {
     labels: [
-      ...weekdays
+      ...weekdays.reverse()
     ],
     datasets: [
       {
