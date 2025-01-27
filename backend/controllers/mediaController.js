@@ -65,7 +65,7 @@ export const getYoutubeStatistics = async (req,res) => {
     const today = new Date();
 
     const sevenDaysAgo = new Date();
-    sevenDaysAgo.setDate(today.getDate() - 7);
+    sevenDaysAgo.setDate(today.getDate() - 8);
 
     const response = await axios.get(`https://youtubeanalytics.googleapis.com/v2/reports`, {
       params: {
@@ -107,7 +107,7 @@ export const getInstaStatistics = async (req, res) => {
 
     const today = new Date();
     const sevenDaysAgo = new Date();
-    sevenDaysAgo.setDate(today.getDate() - 7);
+    sevenDaysAgo.setDate(today.getDate() - 8);
 
 
     const response = await axios.get(`https://graph.instagram.com/${instaUserId}/insights`,
