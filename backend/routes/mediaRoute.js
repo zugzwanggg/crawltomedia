@@ -9,11 +9,11 @@ export const mediaRoute = Router();
 
 mediaRoute.delete('/api/disconnectApp/:user_id/:app_id', disconnectUserApp);
 
-mediaRoute.get('/api/getStatistics/:user_id', checkAuth, getStatistics);
-mediaRoute.get('/api/getInstaStatistics/:user_id/:app_id', getInstaStatistics);
+mediaRoute.get('/api/getStatistics/:user_id', getStatistics);
+mediaRoute.get('/api/getInstaStatistics/:user_id/:app_id', checkAuth, getInstaStatistics);
 mediaRoute.get('/auth/instagram/callback', checkAuth, connectToInstagram);
 
-mediaRoute.get('/api/getYoutubeStatistics/:user_id/:app_id', getYoutubeStatistics)
+mediaRoute.get('/api/getYoutubeStatistics/:user_id/:app_id', checkAuth, getYoutubeStatistics)
 
 mediaRoute.get('/auth/google', (req,res, next) => googlePassport.authenticate('google', 
 {scope: ['profile', 'email', 'https://www.googleapis.com/auth/yt-analytics.readonly',
