@@ -28,10 +28,11 @@ import { IMediaStats } from '../types';
 
 type Params = {
   stats: IMediaStats[],
-  isLoading: boolean
+  isLoading: boolean,
+  currentApp: string
 }
 
-const LineGraph = ({stats, isLoading}:Params) => {
+const LineGraph = ({stats, isLoading, currentApp}:Params) => {
   
 
   const options = {
@@ -71,11 +72,11 @@ const LineGraph = ({stats, isLoading}:Params) => {
       <h2 className='font-semibold text-2xl mt-10'>Views</h2>
       <div className='relative'>
         {
-          isLoading || !stats
+          isLoading
           ?
           <div className='absolute left-0 top-0 w-full h-full bg-black bg-opacity-70 flex items-center justify-center'>
             {
-              isLoading
+              isLoading || !currentApp
               ?
               <LuLoaderCircle className='text-3xl text-white animate-spin'/>
               :

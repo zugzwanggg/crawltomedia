@@ -131,7 +131,7 @@ const Home = () => {
               })
             }
           </ul>
-          <LineGraph stats={data} isLoading={isLineChartLoading}/>
+          <LineGraph currentApp={currentStats} stats={data} isLoading={isLineChartLoading}/>
         </div>
         <div className="flex flex-wrap w-full md:flex-row md:flex-nowrap lg:flex-col lg:w-1/3 gap-4">
           <SocMedias/>
