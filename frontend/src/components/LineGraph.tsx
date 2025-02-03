@@ -43,15 +43,17 @@ const LineGraph = ({stats, isLoading}:Params) => {
     }
   };
 
+  const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
   const data = {
     labels: [
-      (new Date(stats[0]?.date)).getDay(),
-      (new Date(stats[1]?.date)).getDay(),
-      (new Date(stats[2]?.date)).getDay(),
-      (new Date(stats[3]?.date)).getDay(),
-      (new Date(stats[4]?.date)).getDay(),
-      (new Date(stats[5]?.date)).getDay(),
-      (new Date(stats[6]?.date)).getDay(),
+      daysOfWeek[(new Date(stats[0]?.date)).getDay()],
+      daysOfWeek[(new Date(stats[1]?.date)).getDay()],
+      daysOfWeek[(new Date(stats[2]?.date)).getDay()],
+      daysOfWeek[(new Date(stats[3]?.date)).getDay()],
+      daysOfWeek[(new Date(stats[4]?.date)).getDay()],
+      daysOfWeek[(new Date(stats[5]?.date)).getDay()],
+      daysOfWeek[(new Date(stats[6]?.date)).getDay()],
     ],
     datasets: [
       {
