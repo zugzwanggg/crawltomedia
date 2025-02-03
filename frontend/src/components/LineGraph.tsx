@@ -76,7 +76,7 @@ const LineGraph = ({stats, isLoading, currentApp}:Params) => {
           ?
           <div className='absolute left-0 top-0 w-full h-full bg-black bg-opacity-70 flex items-center justify-center'>
             {
-              isLoading || !currentApp
+              isLoading || currentApp === ''
               ?
               <LuLoaderCircle className='text-3xl text-white animate-spin'/>
               :
