@@ -72,11 +72,11 @@ const LineGraph = ({stats, isLoading, currentApp}:Params) => {
       <h2 className='font-semibold text-2xl mt-10'>Views</h2>
       <div className='relative'>
         {
-          isLoading
+          isLoading || currentApp === ''
           ?
           <div className='absolute left-0 top-0 w-full h-full bg-black bg-opacity-70 flex items-center justify-center'>
             {
-              (isLoading || currentApp === '')
+              isLoading
               ?
               <LuLoaderCircle className='text-3xl text-white animate-spin'/>
               :
