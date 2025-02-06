@@ -210,13 +210,6 @@ const AddPost = () => {
                   })
                 }
               </ul>
-              {
-                app === "YouTube"
-                ?
-                <input placeholder={"Your title"} type="text" className="shadow w-full bg-none border dark:border-grayColor rounded-lg resize-none p-4 bg-transparent outline-none"/>
-                :
-                ""
-              }
             <div className="relative w-full">
               <textarea value={text} onChange={handleTextChange} placeholder={t('add.post_text_placeholder')} className="shadow w-full bg-none h-40 border dark:border-grayColor rounded-lg resize-none p-4 bg-transparent outline-none">
               </textarea>
@@ -229,7 +222,7 @@ const AddPost = () => {
           </div>
           
           {
-            app === "youtube"
+            app.toLocaleLowerCase() === "youtube"
             ?
             <div>
               <b>
