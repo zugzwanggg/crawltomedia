@@ -68,3 +68,7 @@ export const STATISTICS = {
     }
   }
 }
+
+export const POST_TO_MEDIA = {
+  
+}
