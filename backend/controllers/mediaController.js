@@ -81,6 +81,7 @@ export const getYoutubeStatistics = async (req,res) => {
     const formattedResponse = {
       app: 'YouTube',
       data: response.data.rows.map(row => ({
+        date: row[0],
         views: row[1], 
         likes: row[2], 
         comments: row[3], 
