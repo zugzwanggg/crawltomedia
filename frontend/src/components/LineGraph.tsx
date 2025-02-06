@@ -33,6 +33,7 @@ type Params = {
 }
 
 const LineGraph = ({stats, isLoading, currentApp}:Params) => {
+  console.log(stats);
   
 
   const options = {
