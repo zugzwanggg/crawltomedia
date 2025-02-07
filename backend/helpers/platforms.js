@@ -1,6 +1,7 @@
 import axios from "axios";
 import dotenv from "dotenv";
 dotenv.config();
+import fs from "fs";
 
 export const STATISTICS = {
   youtube: async (media_user_id, sevenDaysAgo, today, accessToken) => {
@@ -70,7 +71,7 @@ export const STATISTICS = {
 }
 
 export const POST_TO_MEDIA = {
-  instagram: async (access_token, user_id, video_url, content) => {
+  instagram: async (access_token, user_id, video_url, content, status) => {
     const response = await axios.post(`https://graph.facebook.com/v22.0/${user_id}/media`, {
       params: {
         access_token: access_token,
@@ -81,5 +82,38 @@ export const POST_TO_MEDIA = {
     })
 
     return response.data;
+  },
+  youtube: async (access_token, user_id, video_url, content, status) => {
+    const fileSize = fs.statSync(video_url).size;
+
+    const response = await axios.post('https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status', {
+      snippet: {
+        title: content
+      },
+      status: {
+        privacyStatus: status,
+      },
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+        "Content-Type": "application/json",
+        "X-Upload-Content-Type": "video/mp4",
+        "X-Upload-Content-Length": fileSize,
+      },
+    })
+
+    const uploadUrl = response.headers.location;
+    const uploadResponse = await axios.put(uploadUrl, fs.createReadStream(video_url), {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+        "Content-Type": "video/mp4",
+        "Content-Length": fileSize,
+      },
+      maxBodyLength: Infinity,
+      maxContentLength: Infinity,
+    });
+
+    return uploadResponse.data;
   }
 }
