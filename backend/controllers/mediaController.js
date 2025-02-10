@@ -1,6 +1,6 @@
 import { db } from "../db.js";
 import axios from "axios";
-import { STATISTICS } from "../helpers/platforms.js";
+import { STATISTICS, POST_TO_MEDIA } from "../helpers/platforms.js";
 import qs from 'qs';
 
 export const getStatistics = async (req,res) => {
@@ -219,6 +219,28 @@ export const connectToInstagram = async (req,res) => {
     res.redirect(`${process.env.FRONTEND_BASE_URL}/settings/apps`)
   } catch (error) {
     console.log('Error at connectToInstagram', error);
+    res.status(500).send(error)
+  }
+}
+
+export const postToInstagram = async (req,res) => {
+  try {
+    const { media_user_id, access_token, video, content, status } = req.body;
+
+    if (!media_user_id || !access_token || video ) {
+      return res.status(400).json({
+        message: "Please provide all the values needed."
+      })
+    }
+
+    await POST_TO_MEDIA['instagram'](access_token, media_user_id, video, content, status);
+
+    res.status(201).json({
+      message: "Succesfully posted"
+    })
+    
+  } catch (error) {
+    console.log('Error at postToInstagram', error);
     res.status(500).send(error)
   }
 }
