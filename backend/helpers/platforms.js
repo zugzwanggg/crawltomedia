@@ -26,7 +26,7 @@ export const STATISTICS = {
     }
   },
   instagram: async (instaUserId, sevenDaysAgo, today, accessToken) => {
-    const response = await axios.get(`https://graph.instagram.com/${instaUserId}/insights`, {
+    const response = await axios.get(`https://graph.instagram.com/v22.0/${instaUserId}/insights`, {
       params: {
         metric: 'impressions,reach,views,follower_count',
         period: 'day',
@@ -71,17 +71,16 @@ export const STATISTICS = {
 }
 
 export const POST_TO_MEDIA = {
-  instagram: async (access_token, user_id, video_url, content, status) => {
+  instagram: async (access_token, user_id, video_url, content, status, template_url) => {
     const response = await axios.post(
-      `https://graph.facebook.com/v22.0/${user_id}/media`,
-      {
-        video_url: video_url,
-        caption: content,
-      },
+      `https://graph.instagram.com/v22.0/${user_id}/media`,
       {
         params: {
-          access_token: access_token,
-        },
+          video_url: video_url,
+          image_url: template_url,
+          caption: content,
+          access_token: access_token
+        }
       }
     );
 
