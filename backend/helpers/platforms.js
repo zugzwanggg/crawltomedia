@@ -84,7 +84,14 @@ export const POST_TO_MEDIA = {
       }
     );
 
-    return response.data;
+    const creationId = response.data.id;
+    const publish = await axios.post(`https://graph.facebook.com/v22.0/${user_id}/media_publish`, {
+      params: {
+        creation_id: creationId
+      }
+    });
+
+    return publish.data;
   },
   youtube: async (access_token, user_id, video_url, content, status) => {
     const fileSize = fs.statSync(video_url).size;
