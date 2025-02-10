@@ -1,5 +1,5 @@
 import {Router} from "express";
-import { connectToInstagram, disconnectUserApp, getInstaStatistics, getStatistics, getYoutubeStatistics } from "../controllers/mediaController.js";
+import { connectToInstagram, disconnectUserApp, getInstaStatistics, getStatistics, getYoutubeStatistics, postToInstagram } from "../controllers/mediaController.js";
 import {passport as googlePassport} from "../services/passport.js"
 import { checkAuth } from "../middlewares/checkAuth.js";
 
@@ -39,3 +39,8 @@ mediaRoute.get('/auth/google/callback', googlePassport.authenticate('google', {s
 
     res.redirect(`${process.env.FRONTEND_BASE_URL}`)
 })
+
+
+
+// posting
+mediaRoute.post('/api/postToInstagram', postToInstagram);
