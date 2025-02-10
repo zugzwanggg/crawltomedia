@@ -225,15 +225,15 @@ export const connectToInstagram = async (req,res) => {
 
 export const postToInstagram = async (req,res) => {
   try {
-    const { media_user_id, access_token, video, content, status } = req.body;
+    const { media_user_id, access_token, video, content, status, template_url } = req.body;
 
-    if (!media_user_id || !access_token || !video || !content || !status ) {
+    if (!media_user_id || !access_token || !video || !content || !status || !template_url) {
       return res.status(400).json({
         message: "Please provide all the values needed."
       })
     }
 
-    await POST_TO_MEDIA['instagram'](access_token, media_user_id, video, content, status);
+    await POST_TO_MEDIA['instagram'](access_token, media_user_id, video, content, status, template_url);
 
     res.status(201).json({
       message: "Succesfully posted"
