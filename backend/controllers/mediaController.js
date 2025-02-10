@@ -227,7 +227,7 @@ export const postToInstagram = async (req,res) => {
   try {
     const { media_user_id, access_token, video, content, status } = req.body;
 
-    if (!media_user_id || !access_token || video ) {
+    if (!media_user_id || !access_token || !video || !content || !status ) {
       return res.status(400).json({
         message: "Please provide all the values needed."
       })
