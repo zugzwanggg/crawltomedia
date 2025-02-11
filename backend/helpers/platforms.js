@@ -83,9 +83,7 @@ export const POST_TO_MEDIA = {
 
     const creationId = response.data.id;
     const publish = await axios.post(`https://graph.facebook.com/v22.0/${user_id}/media_publish`, {
-      params: {
-        creation_id: creationId
-      }
+      creation_id: creationId
     });
 
     return publish.data;
