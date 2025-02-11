@@ -72,11 +72,10 @@ export const STATISTICS = {
 
 export const POST_TO_MEDIA = {
   instagram: async (access_token, user_id, video_url, content, status, template_url) => {
-    const response = await axios.post(`https://graph.instagram.com/v22.0/${user_id}/media`,
+    const response = await axios.post(`https://graph.instagram.com/v22.0/${user_id}/media?access_token=${access_token}`,
       {
         video_url: video_url,
-        caption: content,
-        access_token: access_token
+        caption: content
       }
     );
 
