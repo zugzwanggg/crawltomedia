@@ -75,7 +75,6 @@ export const POST_TO_MEDIA = {
     const response = await axios.post(`https://graph.instagram.com/v22.0/${user_id}/media`,
       {
         video_url: video_url,
-        image_url: template_url,
         caption: content,
         access_token: access_token
       }
