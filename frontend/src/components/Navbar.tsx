@@ -79,7 +79,7 @@ const Navbar = ({isShort, setIsShort}:Props) => {
             </NavLink>
           </li>
           <li>
-            <NavLink to='/posts/add' className={`bg-darkPrimaryColor dark:bg-white py-2 px-4 rounded-lg flex items-center gap-2`}>
+            <NavLink to='/posts/add' className={`bg-darkPrimaryColor dark:bg-white dark:text-white py-2 px-4 rounded-lg flex items-center gap-2`}>
               <p  className={`${isShort ? 'hidden' : 'hidden md:block'} `}>
                 {t('posts.add_btn')}
               </p>
