@@ -72,28 +72,23 @@ export const STATISTICS = {
 
 export const POST_TO_MEDIA = {
   instagram: async (access_token, user_id, video_url, content, status, template_url) => {
-    try {
-      const response = await axios.post(`https://graph.instagram.com/v18.0/${user_id}/media`,
-        {
-          media_type: "VIDEO",
-          video_url: video_url,
-          caption: content,
-          is_reel: true,
-          access_token: access_token
-        }
-      );
-
-      const creationId = response.data.id;
-      const publish = await axios.post(`https://graph.instagram.com/v18.0/${user_id}/media_publish`, {
-        creation_id: creationId,
+    const response = await axios.post(`https://graph.instagram.com/v18.0/${user_id}/media`,
+      {
+        media_type: "VIDEO",
+        video_url: video_url,
+        caption: content,
+        is_reel: true,
         access_token: access_token
-      });
+      }
+    );
 
-      return publish.data;
-    } catch (error) {
-      console.error('Error posting to Instagram:', error);
-      throw error;
-    }
+    const creationId = response.data.id;
+    const publish = await axios.post(`https://graph.instagram.com/v18.0/${user_id}/media_publish`, {
+      creation_id: creationId,
+      access_token: access_token
+    });
+
+    return publish.data;
   },
   youtube: async (access_token, user_id, video_url, content, status) => {
     const fileSize = fs.statSync(video_url).size;

@@ -99,9 +99,16 @@ export const getYoutubeStatistics = async (req,res) => {
 
 export const getInstaStatistics = async (req, res) => {
   const { user_id, app_id } = req.params;
-  try {
 
-    const instaData = await db.query("SELECT * FROM user_apps WHERE user_id = $1 AND app_id = $2", [user_id, app_id]);
+  try {
+    const instaData = await db.query(
+      "SELECT * FROM user_apps WHERE user_id = $1 AND app_id = $2",
+      [user_id, app_id]
+    );
+
+    if (instaData.rowCount === 0) {
+      return res.status(404).json({ message: "Instagram account not found" });
+    }
 
     const instaUserId = instaData.rows[0].media_user_id;
     const accessToken = instaData.rows[0].access_token;
@@ -110,46 +117,55 @@ export const getInstaStatistics = async (req, res) => {
     const sevenDaysAgo = new Date();
     sevenDaysAgo.setDate(today.getDate() - 7);
 
-
-    const response = await axios.get(`https://graph.instagram.com/${instaUserId}/insights`,
-    {
+    const insightsResponse = await axios.get(`https://graph.instagram.com/${instaUserId}/insights`, {
       params: {
-        metric: 'impressions,reach,views,follower_count',
+        metric: 'reach,profile_views,website_clicks',
         period: 'day',
         since: formatDate(sevenDaysAgo),
         until: formatDate(today),
         access_token: accessToken
-        }
-    }
-    );
+      }
+    });
 
-    if (response.data.error) {
-      console.error("Instagram API error:", response.data.error);
-      return res.status(500).json({ message: "Error fetching Instagram data" });
+    if (insightsResponse.data.error) {
+      console.error("Instagram Insights API error:", insightsResponse.data.error);
+      return res.status(500).json({ message: "Error fetching Instagram insights data" });
+    }
+    const followersResponse = await axios.get(`https://graph.instagram.com/${instaUserId}`, {
+      params: {
+        fields: 'followers_count',
+        access_token: accessToken
+      }
+    });
+
+    if (followersResponse.data.error) {
+      console.error("Instagram Followers API error:", followersResponse.data.error);
+      return res.status(500).json({ message: "Error fetching Instagram followers data" });
     }
 
-    // Extracting and formatting response data like YouTube format
+    const followersCount = followersResponse.data.followers_count || 0;
+
     const metricMapping = {
-      impressions: "views",
-      reach: "likes",
-      profile_views: "comments",
-      follower_count: "subscribersGained"
+      reach: "views",
+      profile_views: "likes",
+      website_clicks: "comments"
     };
 
     const rows = [];
     const dateLabels = [];
 
-    response.data.data.forEach((metric) => {
+    insightsResponse.data.data.forEach((metric) => {
       metric.values.forEach((value, index) => {
-        if (!rows[index]) rows[index] = [0, 0, 0, 0];
+        if (!rows[index]) rows[index] = [0, 0, 0];
         rows[index][Object.keys(metricMapping).indexOf(metric.name)] = value.value || 0;
 
         if (!dateLabels[index]) {
-          dateLabels[index] = value.end_time; 
+          dateLabels[index] = value.end_time;
         }
       });
     });
 
+    
     const formattedResponse = {
       app: 'Instagram',
       data: rows.map((row, index) => ({
@@ -157,17 +173,17 @@ export const getInstaStatistics = async (req, res) => {
         views: row[0],
         likes: row[1],
         comments: row[2],
-        subscribersGained: row[3]
+        subscribersGained: followersCount 
       }))
     };
 
     res.status(200).json(formattedResponse);
-    
+
   } catch (error) {
-    console.log('Error at getInstaStatistics', error);
-    res.status(500).send(error)
+    console.error('Error at getInstaStatistics', error.response?.data || error.message);
+    res.status(500).send({ message: 'Internal server error' });
   }
-}
+};
 
 export const disconnectUserApp = async (req,res) => {
   try {
