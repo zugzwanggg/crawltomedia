@@ -25,7 +25,7 @@ const Post = ({title, logo_path, link}:Props) => {
   }
 
   return (
-    <iframe src={link} onClick={handlePostClick} className="relative mx-2 w-full bg-black aspect-post rounded overflow-hidden p-4 text-primaryColor">
+    <li onClick={handlePostClick} className="relative mx-2 w-full bg-black aspect-post rounded overflow-hidden p-4 text-primaryColor">
       <div className="flex justify-between items-center">
         <BsThreeDotsVertical onClick={()=>setIsActive(prev=>!prev)} className="text-xl opacity-80 hover:opacity-100"/>
         <img src={logo_path} className="w-8 h-8 object-cover" />
@@ -72,7 +72,7 @@ const Post = ({title, logo_path, link}:Props) => {
         </li>
       </ul>
 
-    </iframe>
+    </li>
   )
 }
 
