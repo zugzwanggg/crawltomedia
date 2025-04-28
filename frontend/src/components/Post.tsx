@@ -4,24 +4,28 @@ import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaRegEye } from "react-icons/fa";
 import { BiLike } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   id: number|string,
   title: string,
-  logo_path: string
+  logo_path: string,
+  link: string
 }
 
-const Post = ({title, logo_path}:Props) => {
+const Post = ({title, logo_path, link}:Props) => {
+  const navigate = useNavigate();
   const [isActive, setIsActive] = useState(false);
 
   const handlePostClick = () => {
+    navigate(link)
     if (isActive) {
       setIsActive(false)
     }
   }
 
   return (
-    <li onClick={handlePostClick} className="relative mx-2 w-full bg-black aspect-post rounded overflow-hidden p-4 text-primaryColor">
+    <iframe src={link} onClick={handlePostClick} className="relative mx-2 w-full bg-black aspect-post rounded overflow-hidden p-4 text-primaryColor">
       <div className="flex justify-between items-center">
         <BsThreeDotsVertical onClick={()=>setIsActive(prev=>!prev)} className="text-xl opacity-80 hover:opacity-100"/>
         <img src={logo_path} className="w-8 h-8 object-cover" />
@@ -68,7 +72,7 @@ const Post = ({title, logo_path}:Props) => {
         </li>
       </ul>
 
-    </li>
+    </iframe>
   )
 }
 

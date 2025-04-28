@@ -26,6 +26,7 @@ CREATE TABLE posts (
   status VARCHAR NOT NULL DEFAULT 'pending',
   title VARCHAR(255) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  link TEXT,
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (app_id) REFERENCES apps(id)
 );
