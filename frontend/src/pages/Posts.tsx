@@ -164,7 +164,7 @@ const Posts = () => {
             posts.length > 0
             ?
             posts.map(post => {
-              return <Post key={post.id} id={post.id} title={post.title} logo_path={post.logo_path}/>
+              return <Post link={post.link} key={post.id} id={post.id} title={post.title} logo_path={post.logo_path}/>
             })
             :
             <p className="py-10 w-full text-center">

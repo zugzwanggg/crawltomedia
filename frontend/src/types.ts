@@ -15,6 +15,7 @@ export interface IPost {
   status: string,
   title: string,
   logo_path: string,
+  link: string,
   created_at: Date
 }
 
