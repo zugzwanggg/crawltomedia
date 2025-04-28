@@ -4,7 +4,7 @@ import { useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaRegEye } from "react-icons/fa";
 import { BiLike } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 type Props = {
   id: number|string,
@@ -28,7 +28,9 @@ const Post = ({title, logo_path, link}:Props) => {
     <li onClick={handlePostClick} className="relative mx-2 w-full bg-black aspect-post rounded overflow-hidden p-4 text-primaryColor">
       <div className="flex justify-between items-center">
         <BsThreeDotsVertical onClick={()=>setIsActive(prev=>!prev)} className="text-xl opacity-80 hover:opacity-100"/>
-        <img src={logo_path} className="w-8 h-8 object-cover" />
+        <Link to={link}>
+          <img src={logo_path} className="w-8 h-8 object-cover" />
+        </Link>
       </div>
 
       {
